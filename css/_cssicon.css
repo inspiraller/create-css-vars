@@ -1,0 +1,7 @@
+.cssicon {
+  width: 40px;
+  height: 40px;
+  border: 3px solid white;
+  background: var(--secondary-blue);
+  border-radius: 50%;
+}

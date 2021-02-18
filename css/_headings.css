@@ -1,0 +1,75 @@
+
+/*
+slogan 
+  margin: 24px 0 0 0;
+  padding: 0 60px;
+  width: 448px;
+*/
+
+.h1,
+.h1--lineh {
+  line-height: 3.45rem;
+}
+
+.h1 {
+  font-size: 2.6rem;
+  /* font-family: 'sharp_sansbold'; */
+  font-family: "mint-extrabold";
+}
+
+@media (max-width:1427px){ 
+  .h1,
+  .h1--lineh {
+    line-height: 2.9rem;
+  }
+
+  .h1 {
+    font-size: 2.2rem;
+  }
+}
+
+
+.h2,
+.h2--lineh {
+  line-height: 2.915rem;
+}
+
+.h2 {
+  font-size: 2.2rem;
+  /* font-family: "sharp_sansbold"; */
+  font-family: "mint-extrabold";
+}
+
+.h3 {
+  font-size: 1.8rem;
+  /* font-family: "sharp_sansbold"; */
+  font-family: "mint-bold";
+}
+.h4 {
+  font-size: 1.6rem;
+  /* font-family: "sharp_sansbold"; */
+  font-family: "mint-bold";
+}
+
+.h5 {
+  /*font-size: 1.5rem;
+  font-family: "sharp_sansbold"; */
+  font-size: 1.4rem;
+  font-family: "mint-bold";
+}
+
+.h6 {
+  /* font-family: "sharp_sansbold"; */
+  font-family: "mint-bold";
+  font-size: 1.3rem;
+}
+
+.h6--semi {
+  font-family: "sharp_sanssemibold";
+  font-size: 1.3rem;
+}
+
+.h7 {
+  font-family: "sharp_sansmedium";
+  font-size: 1.2rem;
+}
