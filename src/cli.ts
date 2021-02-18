@@ -1,29 +1,21 @@
-type TKeyString = { [key: string]: string };
+import getArgs from './lib/getArgs';
+import createVarFromDir from './lib/createVarFromDir';
 
-type TsplitArgIntoObj = (item: string) => TKeyString | null;
-const splitArgIntoObj: TsplitArgIntoObj = item => {
-  const arr = item.split('=');
-  return {
-    [arr[0]]: arr[1]
-  };
-};
-
-type TgetArgs = (args: string[]) => TKeyString;
-const getArgs: TgetArgs = args =>
-  args.reduce(
-    (accum, cur) => ({
-      ...accum,
-      ...((cur.indexOf('--') === 0) ? splitArgIntoObj(cur.substr(2)) : {})
-    }),
-    {} as TKeyString
-  );
+import path from 'path';
 
 type Tcli = (args: string[]) => string;
 const cli: Tcli = args => {
   const objArgs = getArgs(args);
-  console.log('args = ', args);
-  console.log('objArgs = ', objArgs);
-  return 'hello world';
+  const from = objArgs.from;
+  const to = objArgs.to;
+  const pathIn = from ? path.resolve(__dirname, from) : path.resolve(__dirname);
+  // const pathOut = to ? path.resolve(__dirname, to) : path.resolve(__dirname);
+
+  const str = createVarFromDir(pathIn);
+
+  console.log('str = ', str);
+  // map dir and generate file
+  return str;
 };
 
 export { cli };
