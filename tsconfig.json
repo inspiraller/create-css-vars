@@ -29,6 +29,6 @@
       "node"
     ]
   },
-  "exclude": ["dist", "jest.config.js"],
+  "exclude": ["dist", "jest.config.js", "src/index.ts"],
   "include": [ "src", "@types"]
 }

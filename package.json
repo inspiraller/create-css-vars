@@ -1,5 +1,5 @@
 {
-  "name": "@your_npm_username/create-convert-css-to-variables",
+  "name": "@inspiraller/create-convert-css-to-variables",
   "version": "1.0.0",
   "description": "This converts a directory of css files into a file of variable names.",
   "keywords": [
@@ -18,7 +18,6 @@
     "access": "public"
   },
   "bin": {
-    "@inspiraller/create-convert-css-to-variables": "bin/create-convert-css-to-variables",
     "create-convert-css-to-variables": "bin/create-convert-css-to-variables"
   },
   "scripts": {
