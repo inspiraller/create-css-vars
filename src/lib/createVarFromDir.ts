@@ -1,8 +1,6 @@
-import { strikethrough } from 'chalk';
 import fs from 'fs';
 import path from 'path';
-import process from 'process';
-import updateVars from './updateVars';
+import updateVars, { ObjCssAll } from './updateVars';
 
 type TexcludeDir = (file: string) => boolean;
 const excludeDir: TexcludeDir = file =>
@@ -20,8 +18,8 @@ const excludeDir: TexcludeDir = file =>
     // 'stories'
   ].indexOf(file) !== -1;
 
-type TcreateVarFromDir = (pathIn: string, strBuild?: string) => string;
-const createVarFromDir: TcreateVarFromDir = (pathIn, strBuild = '') => {
+type TcreateVarFromDir = (pathIn: string, objCssAll: ObjCssAll) => ObjCssAll;
+const createVarFromDir: TcreateVarFromDir = (pathIn, objCssAll) => {
   const files = fs.readdirSync(pathIn);
   console.log('#############################');
   console.log('process directory = ', pathIn);
@@ -31,15 +29,15 @@ const createVarFromDir: TcreateVarFromDir = (pathIn, strBuild = '') => {
     const stat = fs.statSync(fromPath);
     if (stat.isFile()) {
       if (file.search(/\.css$/) !== -1) {
-        strBuild = updateVars(path.resolve(pathIn, file), strBuild);
+        objCssAll = updateVars(path.resolve(pathIn, file), objCssAll);
       }
     } else if (stat.isDirectory()) {
       if (!excludeDir(file)) {
-        strBuild = createVarFromDir(path.resolve(pathIn, file), strBuild);
+        objCssAll = createVarFromDir(path.resolve(pathIn, file), objCssAll);
       }
     }
   });
-  return strBuild;
+  return objCssAll;
 };
 
 export default createVarFromDir;
