@@ -2,6 +2,14 @@ import fs from 'fs';
 import getSafMarkers from './getSafeMarkers';
 import clearCssComments from './clearCssComents';
 import execReg from './execReg';
+import {
+  regTruncate,
+  regCombined,
+  regSingle,
+  regWithChild,
+  regPseudoOrAttr,
+  regBeginNonSingle
+} from './regCss';
 
 export interface KeyStringArr {
   [key: string]: string[];
@@ -12,39 +20,16 @@ export interface ObjCssAllNonMediaQuery {
   single: KeyStringArr;
   withchild: KeyStringArr;
   pseudo: KeyStringArr;
+  beginNonSingle: KeyStringArr;
 }
 
 export interface ObjCssAll extends ObjCssAllNonMediaQuery {
   mediaq: ObjCssAllNonMediaQuery;
 }
 
-const regCleanSel = /^\s*|\s*$/g;
-const sregSelOr = 'a-zA-Z\\#\\.\\[\\]\\*';
-const sregNotCurly = `[^\\{\\}]*`;
-const sregSel = `[${sregSelOr}]`;
-
-const regCombined = RegExp(
-  `(^|\\n)\\s*(${sregSel}[^\\{\\,]*\\,\\s*${sregSel}${sregNotCurly})\\{(${sregNotCurly})\\}`,
-  'ig'
-);
-const regSingleNonPseudo = RegExp(
-  `(^|\\n)\\s*(${sregSel}[^\\s\\{\\:]*)\\s*\\{(${sregNotCurly})\\}`,
-  'ig'
-);
-
-const regWithChild = RegExp(
-  `(^|\\n)\\s*(${sregSel}[^\\s\\{\\,]*\\s[${sregSelOr}\\>\\+\\~\\|]${sregNotCurly})\\s*\\{(${sregNotCurly})\\}`,
-  'ig'
-);
-
-const regPseudo = RegExp(
-  `(^|\\n)\\s*(${sregSel}[^\\s\\{\\,\\:]*\\:${sregNotCurly})\\s*\\{(${sregNotCurly})\\}`,
-  'ig'
-);
-
 type TconcatCombinedSelectors = (strSelectors: string) => string[];
 const concatCombinedSelectors: TconcatCombinedSelectors = strSelectors =>
-  strSelectors.split(',').map(sel => sel.replace(regCleanSel, ''));
+  strSelectors.split(',').map(sel => sel.replace(regTruncate, ''));
 
 type Tconstruct = (props: {
   objCss: KeyStringArr;
@@ -107,8 +92,16 @@ const iteratePopObjCss: TiteratePopObjCss = ({
   return objCss;
 };
 
-type TpopObjCss = (objCssAll: ObjCssAll, str: string) => ObjCssAll;
-const popObjCss: TpopObjCss = (objCssAll, str) => {
+type TpopulateObjCssPerFile = (file: string, objCssAll: ObjCssAll) => ObjCssAll;
+const populateObjCssPerFile: TpopulateObjCssPerFile = (file, objCssAll) => {
+  const read = fs.readFileSync(file);
+  let str = read.toString();
+
+  const {
+    objM: { m1 }
+  } = getSafMarkers(str);
+  str = clearCssComments(str, m1);
+
   objCssAll.combined = iteratePopObjCss({
     objCss: objCssAll.combined,
     str,
@@ -119,7 +112,7 @@ const popObjCss: TpopObjCss = (objCssAll, str) => {
   objCssAll.single = iteratePopObjCss({
     objCss: objCssAll.single,
     str,
-    reg: regSingleNonPseudo,
+    reg: regSingle,
     constructCssObj: constructSingleNonPseudoObjCss
   });
 
@@ -133,24 +126,18 @@ const popObjCss: TpopObjCss = (objCssAll, str) => {
   objCssAll.pseudo = iteratePopObjCss({
     objCss: objCssAll.pseudo,
     str,
-    reg: regPseudo,
+    reg: regPseudoOrAttr,
+    constructCssObj: constructAnyObjCss
+  });
+
+  objCssAll.beginNonSingle = iteratePopObjCss({
+    objCss: objCssAll.beginNonSingle,
+    str,
+    reg: regBeginNonSingle,
     constructCssObj: constructAnyObjCss
   });
 
   return objCssAll;
 };
 
-type TupdateVars = (file: string, objCssAll: ObjCssAll) => ObjCssAll;
-const updateVars: TupdateVars = (file, objCssAll) => {
-  const read = fs.readFileSync(file);
-  let str = read.toString();
-
-  const {
-    objM: { m1 }
-  } = getSafMarkers(str);
-  str = clearCssComments(str, m1);
-
-  return popObjCss(objCssAll, str);
-};
-
-export default updateVars;
+export default populateObjCssPerFile;

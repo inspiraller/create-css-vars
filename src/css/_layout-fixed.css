@@ -1,4 +1,12 @@
 
+.l-fixed--top,
+.soemthing,
+[s="black"],
+s:hover,
+s::hover {
+  position: absolute;
+}
+
 .l-fixed--top {
   position: fixed;
   top: 0;

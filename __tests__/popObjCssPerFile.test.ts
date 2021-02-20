@@ -1,6 +1,6 @@
-import { KeyStringArr, constructCombinedObjCss } from 'src/lib/updateVars';
+import { KeyStringArr, constructCombinedObjCss } from 'src/lib/populateObjCssPerFile';
 
-describe('updateVars()', () => {
+describe('populateObjCssPerFile()', () => {
   describe('constructCombinedObjCss() - ,header,section,aside .child,', () => {
     it('should match 1 combined selector', () => {
       const strCss = 'position: absolute';

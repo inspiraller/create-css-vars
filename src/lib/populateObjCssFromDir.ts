@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import updateVars, { ObjCssAll } from './updateVars';
+import populateObjCssPerFile, { ObjCssAll } from './populateObjCssPerFile';
 
 type TexcludeDir = (file: string) => boolean;
 const excludeDir: TexcludeDir = file =>
@@ -18,8 +18,22 @@ const excludeDir: TexcludeDir = file =>
     // 'stories'
   ].indexOf(file) !== -1;
 
-type TcreateVarFromDir = (pathIn: string, objCssAll: ObjCssAll) => ObjCssAll;
-const createVarFromDir: TcreateVarFromDir = (pathIn, objCssAll) => {
+type TpopulateObjCssFromDir = (pathIn: string, objCssAll?: ObjCssAll) => ObjCssAll;
+const populateObjCssFromDir: TpopulateObjCssFromDir = (
+  pathIn,
+  objCssAll = {
+    combined: {},
+    single: {},
+    withchild: {},
+    pseudo: {},
+    mediaq: {
+      combined: {},
+      single: {},
+      withchild: {},
+      pseudo: {}
+    }
+  }
+) => {
   const files = fs.readdirSync(pathIn);
   console.log('#############################');
   console.log('process directory = ', pathIn);
@@ -29,15 +43,15 @@ const createVarFromDir: TcreateVarFromDir = (pathIn, objCssAll) => {
     const stat = fs.statSync(fromPath);
     if (stat.isFile()) {
       if (file.search(/\.css$/) !== -1) {
-        objCssAll = updateVars(path.resolve(pathIn, file), objCssAll);
+        objCssAll = populateObjCssPerFile(path.resolve(pathIn, file), objCssAll);
       }
     } else if (stat.isDirectory()) {
       if (!excludeDir(file)) {
-        objCssAll = createVarFromDir(path.resolve(pathIn, file), objCssAll);
+        objCssAll = populateObjCssFromDir(path.resolve(pathIn, file), objCssAll);
       }
     }
   });
   return objCssAll;
 };
 
-export default createVarFromDir;
+export default populateObjCssFromDir;
