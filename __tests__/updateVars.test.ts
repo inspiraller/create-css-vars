@@ -5,8 +5,8 @@ describe('updateVars()', () => {
     it('should match 1 combined selector', () => {
       const strCss = 'position: absolute';
       const objCss: KeyStringArr = {};
-      const arrSelectors = ['header', 'section', 'aside .child'];
-      const actual = constructCombinedObjCss({ objCss, arrSelectors, strCss });
+      const strSelectors = 'header,section,aside .child';
+      const actual = constructCombinedObjCss({ objCss, strSelectors, strCss });
 
       const expected: KeyStringArr = {
         ',header,section,aside .child,': [strCss]
@@ -16,8 +16,8 @@ describe('updateVars()', () => {
     it('should not match single selector - header', () => {
       const strCss = 'position: absolute';
       const objCss: KeyStringArr = {};
-      const arrSelectors = ['header'];
-      const actual = constructCombinedObjCss({ objCss, arrSelectors, strCss });
+      const strSelectors = 'header';
+      const actual = constructCombinedObjCss({ objCss, strSelectors, strCss });
       const expected: KeyStringArr = {};
       expect(actual).toEqual(expected);
     });
@@ -26,8 +26,8 @@ describe('updateVars()', () => {
       const objCss: KeyStringArr = {
         ',header,section,aside .child,': [strCss]
       };
-      const arrSelectors = ['header', 'section', 'aside .child'];
-      const actual = constructCombinedObjCss({ objCss, arrSelectors, strCss });
+      const strSelectors = 'header,section,aside .child';
+      const actual = constructCombinedObjCss({ objCss, strSelectors, strCss });
       const expected: KeyStringArr = {
         ',header,section,aside .child,': [objCss[',header,section,aside .child,'][0], strCss]
       };
