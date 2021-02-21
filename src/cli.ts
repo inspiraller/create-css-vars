@@ -15,6 +15,7 @@ const cli: Tcli = args => {
   const objCssAll = populateObjCssFromDir(pathIn);
   const vars = createVarsFromObjCss(objCssAll);
 
+  console.log('objCssAll.pseudo = ', objCssAll.pseudo);
   console.log('objCssAll.combined = ', objCssAll.combined);
   console.log('vars = ', vars);
 
