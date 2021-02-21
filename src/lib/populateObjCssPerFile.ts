@@ -20,7 +20,7 @@ export interface ObjCssAllNonMediaQuery {
   single: KeyStringArr;
   withchild: KeyStringArr;
   pseudo: KeyStringArr;
-  beginNonSingle: KeyStringArr;
+  beginNonSingle: KeyStringArr; // * or [] or -root or @ etc...
 }
 
 export interface ObjCssAll extends ObjCssAllNonMediaQuery {

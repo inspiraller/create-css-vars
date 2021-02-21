@@ -1,14 +1,5 @@
 import clearCssComments from 'src/lib/clearCssComents';
-
-type TFuncStr = (str: string, str2?: string, str3?: string) => string;
-
-const crop: TFuncStr = str => {
-  str = str.replace(/(^\s+|\s+$)/g, '');
-  str = str.replace(/\n\s*/g, '\n');
-  str = str.replace(/\n\s*\n/g, '\n');
-  str = str.replace(/\n\s*\n/g, '\n');
-  return str;
-};
+import { crop } from './_utils';
 
 describe('updateVars()', () => {
   describe('clearCssComments()', () => {
