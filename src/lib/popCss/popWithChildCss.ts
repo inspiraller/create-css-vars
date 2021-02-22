@@ -1,0 +1,44 @@
+import { TFuncStr } from 'src/types';
+import { sregWithChild, sregCombinator } from '../regCss';
+import { TarrCss, TpopCss } from './popCombinedCss';
+
+const createCssWithChild: TFuncStr = (strChildSelector, css) => `& ${strChildSelector} {
+  ${css}
+}\n`;
+
+const regSpaceInAttr = /(\[[^\[\]\s]*)\s+/g;
+const removeSpaceInAttr: TFuncStr = str => {
+  while (str.search(regSpaceInAttr) !== -1) {
+    str = str.replace(regSpaceInAttr, '$1');
+  }
+  return str;
+};
+const multipleSpaceTo1Space: TFuncStr = str => str.replace(/ {2,}/g, ' ');
+
+const regNoSpaceCombinator = RegExp(`(\\S)([${sregCombinator}])`);
+const addSpaceForProximityCombinator: TFuncStr = str => str.replace(regNoSpaceCombinator, '$1 $2 ');
+
+const getChildSelector: TFuncStr = strObjCssSelectorKey => {
+  let str = strObjCssSelectorKey;
+  str = removeSpaceInAttr(str);
+  str = addSpaceForProximityCombinator(str);
+  str = multipleSpaceTo1Space(str);
+
+  return str.substr(str.indexOf(' ') + 1);
+};
+
+export const popWithChildCss: TpopCss = ({ strSingleSelector, objCss }) => {
+  const arrCss: TarrCss = [];
+  const regInside = RegExp(`${strSingleSelector}${sregWithChild}`);
+  Object.keys(objCss).forEach(strEachSelector => {
+    if (strEachSelector.search(regInside) !== -1) {
+      const strChildSelector = getChildSelector(strEachSelector);
+      const css = objCss[strEachSelector].join('\n');
+      const cssWithChild = createCssWithChild(strChildSelector, css);
+      arrCss.push(cssWithChild);
+    }
+  });
+  return arrCss.join('');
+};
+
+export default popWithChildCss;

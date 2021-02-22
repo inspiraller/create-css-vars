@@ -1,4 +1,3 @@
-import fs from 'fs';
 import getSafMarkers from './getSafeMarkers';
 import clearCssComments from './clearCssComents';
 import execReg from './execReg';
@@ -15,16 +14,26 @@ export interface KeyStringArr {
   [key: string]: string[];
 }
 
-export interface ObjCssAllNonMediaQuery {
+export interface ObjCssAllReq {
   combined: KeyStringArr;
   single: KeyStringArr;
-  withchild: KeyStringArr;
   pseudo: KeyStringArr;
+  withchild: KeyStringArr;
   beginNonSingle: KeyStringArr; // * or [] or -root or @ etc...
 }
 
-export interface ObjCssAll extends ObjCssAllNonMediaQuery {
-  mediaq: ObjCssAllNonMediaQuery;
+export interface ObjCssAllOptional {
+  combined?: ObjCssAllReq['combined'];
+  single?: ObjCssAllReq['single'];
+  pseudo?: ObjCssAllReq['pseudo'];
+  withchild?: ObjCssAllReq['withchild'];
+  beginNonSingle?: ObjCssAllReq['beginNonSingle']; // * or [] or -root or @ etc...
+}
+
+export interface ObjCssAll extends ObjCssAllReq {
+  mediaq: {
+    [key: string]: ObjCssAllOptional;
+  };
 }
 
 type TconcatCombinedSelectors = (strSelectors: string) => string[];
@@ -92,11 +101,9 @@ const iteratePopObjCss: TiteratePopObjCss = ({
   return objCss;
 };
 
-type TpopulateObjCssPerFile = (file: string, objCssAll: ObjCssAll) => ObjCssAll;
-const populateObjCssPerFile: TpopulateObjCssPerFile = (file, objCssAll) => {
-  const read = fs.readFileSync(file);
-  let str = read.toString();
-
+type TpopulateObjCssPerFile = (strReadFile: string, objCssAll: ObjCssAll) => ObjCssAll;
+const populateObjCssPerFile: TpopulateObjCssPerFile = (strReadFile, objCssAll) => {
+  let str = strReadFile;
   const {
     objM: { m1 }
   } = getSafMarkers(str);

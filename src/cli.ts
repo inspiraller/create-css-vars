@@ -1,6 +1,6 @@
 import getArgs from './lib/getArgs';
 import populateObjCssFromDir from './lib/populateObjCssFromDir';
-import createVarsFromObjCss from './lib/createVarsFromObjCss';
+import createVarsFromPopCss from './lib/createVarsFromPopCss';
 
 import path from 'path';
 
@@ -13,7 +13,7 @@ const cli: Tcli = args => {
   // const pathOut = to ? path.resolve(__dirname, to) : path.resolve(__dirname);
 
   const objCssAll = populateObjCssFromDir(pathIn);
-  const vars = createVarsFromObjCss(objCssAll);
+  const vars = createVarsFromPopCss(objCssAll);
 
   console.log('objCssAll.pseudo = ', objCssAll.pseudo);
   console.log('objCssAll.combined = ', objCssAll.combined);

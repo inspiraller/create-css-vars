@@ -18,6 +18,11 @@ const excludeDir: TexcludeDir = file =>
     // 'stories'
   ].indexOf(file) !== -1;
 
+const readFile: TFuncStr = file => {
+  const read = fs.readFileSync(file);
+  return read.toString();
+};
+
 type TpopulateObjCssFromDir = (pathIn: string, objCssAll?: ObjCssAll) => ObjCssAll;
 const populateObjCssFromDir: TpopulateObjCssFromDir = (
   pathIn,
@@ -26,12 +31,8 @@ const populateObjCssFromDir: TpopulateObjCssFromDir = (
     single: {},
     withchild: {},
     pseudo: {},
-    mediaq: {
-      combined: {},
-      single: {},
-      withchild: {},
-      pseudo: {}
-    }
+    beginNonSingle: {},
+    mediaq: {}
   }
 ) => {
   const files = fs.readdirSync(pathIn);
@@ -43,7 +44,8 @@ const populateObjCssFromDir: TpopulateObjCssFromDir = (
     const stat = fs.statSync(fromPath);
     if (stat.isFile()) {
       if (file.search(/\.css$/) !== -1) {
-        objCssAll = populateObjCssPerFile(path.resolve(pathIn, file), objCssAll);
+        const str = readFile(path.resolve(pathIn, file));
+        objCssAll = populateObjCssPerFile(str, objCssAll);
       }
     } else if (stat.isDirectory()) {
       if (!excludeDir(file)) {

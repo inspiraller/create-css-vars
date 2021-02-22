@@ -1,4 +1,4 @@
-import { popWithChildCss } from 'src/lib/createVarsFromObjCss';
+import popWithChildCss from 'src/lib/popCss/popWithChildCss';
 import { KeyStringArr } from 'src/lib/populateObjCssPerFile';
 import { crop } from '../_utils';
 
