@@ -7,13 +7,13 @@
 # Download this repo
 
 ```
-git clone ...
+git clone ...create-css-vars
 ```
 
 # cd into folder
 
 ```
-cd node-promise-process
+cd create-css-vars
 ```
 
 # install dependencies
@@ -28,23 +28,47 @@ or
 npm install
 ```
 
-# run
+# position your css folder locally 
 ```
-npm start
+css /
+  myfile.css
+```
+# run 
+```
+create-css-vars --from=./css --to=./css-vars.ts
+```
+# will output 
+- a file with variables to reference the css in your styled components.
+exampe:
+```css
+const vars = {
+  '.link': `
+
+    /* combined - .link, .btn*/
+    border: 1px solid red;
+    /* */
+
+    background: red;
+    &:hover {
+      color: blue;
+    }
+    [x] {
+      color: pink;
+    }
+    @media () {
+      width: 100px;
+    }
+  `
+}
+
 ```
 
-# output - example
+# Import this variable into your styled component
+```typescript
+import vars from './css-vars';
+import styled from 'styled-components';
+const Link = styled.span`
+  ${vars['.link']}
+`;
 
-```
-export const l-main = `
-  margin: 0 0 0 10px
-
-  @media 1 {
-     etc....
-  }
-
-  @media 2 {
-    etc....
-  }
-`
 ```

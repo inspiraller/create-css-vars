@@ -1,5 +1,5 @@
 {
-  "name": "@inspiraller/create-convert-css-to-variables",
+  "name": "@inspiraller/create-css-vars",
   "version": "1.0.0",
   "description": "This converts a directory of css files into a file of variable names.",
   "keywords": [
@@ -8,18 +8,19 @@
   ],
   "author": "Steve Tomlin",
   "license": "MIT",
-  "files": [
-    "dist/**/*"
-  ],
   "repository": {
-    "url": ""
+    "url": "https://github.com/inspiraller/create-css-vars"
   },
   "publishConfig": {
     "access": "public"
   },
   "bin": {
-    "create-convert-css-to-variables": "bin/create-convert-css-to-variables"
+    "create-css-vars": "bin/create-css-vars"
   },
+  "files": [
+    "bin/",
+    "dist/"
+  ],
   "scripts": {
     "test": "cross-env NODE_ENV=test jest",
     "start": "cross-env-shell babel-node --extensions '.ts,.tsx' src/index.ts --from=./testcss",
