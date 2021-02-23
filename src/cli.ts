@@ -69,8 +69,22 @@ const cli: Tcli = args => {
   const objArgs = getArgs(args);
   const from = objArgs.from;
   const to = objArgs.to;
-  const pathIn = from ? path.resolve(__dirname, from) : path.resolve(__dirname);
-  const pathOut = to ? path.resolve(__dirname, to) : path.resolve(__dirname, 'css-vars.ts');
+
+  let pathIn = '';
+  if (from) {
+    pathIn = fs.existsSync(from) ? from : path.resolve(__dirname, from);
+  }
+  if (!fs.existsSync(pathIn)) {
+    pathIn = path.resolve(__dirname);
+  }
+
+  let pathOut = '';
+  if (to) {
+    pathOut = fs.existsSync(to) ? to : path.resolve(__dirname, to);
+  }
+  if (!fs.existsSync(pathOut)) {
+    pathOut = path.resolve(__dirname);
+  }
 
   const objCssAll = populateObjCssFromDir(pathIn);
   const vars = createVarsFromPopCss(objCssAll);
@@ -82,11 +96,13 @@ const cli: Tcli = args => {
   const strVars = convertVarsToStr(vars, objCssAll.combined);
   //console.log('strVars = ', strVars);
 
-  fs.writeFile(pathOut, strVars, err => {
+  const outFile = 'css-vars.ts';
+
+  fs.writeFile(path.resolve(pathOut, outFile), strVars, err => {
     if (err) {
       throw err;
     }
-    console.log(`File: "${pathOut}" created successfully.`);
+    console.log(`File: "${pathOut}${outFile}" created successfully.`);
   });
 
   return 'hello';

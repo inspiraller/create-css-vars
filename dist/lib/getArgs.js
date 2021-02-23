@@ -1,0 +1,1 @@
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});const splitArgIntoObj=item=>{const arr=item.split('=');return{[arr[0]]:arr[1]};};const getArgs=args=>args.reduce((accum,cur)=>Object.assign(Object.assign({},accum),cur.indexOf('--')===0?splitArgIntoObj(cur.substr(2)):{}),{});exports.default=getArgs;

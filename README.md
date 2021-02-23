@@ -35,9 +35,10 @@ css /
 ```
 # run 
 ```
-create-css-vars --from=./css --to=./css-vars.ts
+create-css-vars --from=./css --to=./
 ```
 # will output 
+**css-vars.ts**
 - a file with variables to reference the css in your styled components.
 exampe:
 ```css

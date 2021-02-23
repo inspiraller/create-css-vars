@@ -1,0 +1,1 @@
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});const execReg=({str,reg,callback})=>{let arrM;while(arrM=reg.exec(str)){callback(arrM);}};exports.default=execReg;

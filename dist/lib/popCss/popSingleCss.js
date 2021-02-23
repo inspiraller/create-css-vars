@@ -1,0 +1,1 @@
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});const popSingleCss=({strSingleSelector,objCss})=>{const arrCss=objCss[strSingleSelector];return arrCss&&arrCss.length?arrCss.join('\n')+'\n\n':'';};exports.default=popSingleCss;

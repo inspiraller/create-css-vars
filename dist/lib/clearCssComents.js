@@ -1,0 +1,1 @@
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});const clearCssComments=(strAll,marker='\xAC')=>{let str=strAll;const m1=marker;str=str.replace(/(\*\/)/g,['$1',m1].join(''));const regComment=RegExp(`\\/\\*[^${m1}]*\\*\\/${m1}`,'g');str=str.replace(regComment,'');str=str.replace(m1,'');return str;};exports.default=clearCssComments;
