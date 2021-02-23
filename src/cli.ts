@@ -61,11 +61,12 @@ const convertVarsToStr: TconvertVarsToStr = vars => {
     interface Vars {
       [key: string]: string;
     }
-    export const vars: Vars = {\n${convertObjStrToStr(vars)}\n};
+    const vars: Vars = {\n${convertObjStrToStr(vars)}\n};
+    export default vars;
   `;
 };
 
-type Tcli = (args: string[]) => string;
+type Tcli = (args: string[]) => void;
 const cli: Tcli = args => {
   const objArgs = getArgs(args);
   const from = objArgs.from;
@@ -78,6 +79,7 @@ const cli: Tcli = args => {
     pathIn = fs.existsSync(from) ? from : path.resolve(cwd, from);
   }
   if (!fs.existsSync(pathIn)) {
+    console.log(`! Warning: --from path "${from}" not found. Will load css from ${cwd}`);
     pathIn = path.resolve(cwd);
   }
 
@@ -86,6 +88,7 @@ const cli: Tcli = args => {
     pathOut = fs.existsSync(to) ? to : path.resolve(cwd, to);
   }
   if (!fs.existsSync(pathOut)) {
+    console.log(`! Warning: --to path "${to}" not found. Will create here: ${cwd}/css-vars.ts`);
     pathOut = path.resolve(cwd);
   }
 
@@ -99,7 +102,8 @@ const cli: Tcli = args => {
   const strVars = convertVarsToStr(vars);
 
   if (!strVars) {
-    console.log('There is no css!!');
+    console.log('! Warning: There is no css!!');
+    return
   }
   //console.log('strVars = ', strVars);
 
@@ -111,8 +115,6 @@ const cli: Tcli = args => {
     }
     console.log(`File: "${pathOut}\\${outFile}" created successfully.`);
   });
-
-  return 'hello';
 };
 
 export { cli };

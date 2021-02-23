@@ -3,13 +3,13 @@
 npm i @inspiraller/create-css-vars --save
 ```
 
-# Create a folder of css files locally 
+# Create a folder of css files locally
 ```
 css /
   myfile.css
 ```
 
-# example - 
+# example -
 **myfile.css**
 ```css
 .link,
@@ -41,7 +41,15 @@ link[x] {
   },
 ```
 
-# run script 
+# Update to targeted paths if desired
+**package.json**
+```
+  "scripts": {
+    "start": "create-css-vars --from=./mycss to=./mylocal/folder"
+  },
+```
+
+# run script
 ```
 npm start
 ```
@@ -94,6 +102,5 @@ const Link = styled.span`
 *
 [attWithoutElem=""]
 @font-face
-:root 
+:root
  ```
-
