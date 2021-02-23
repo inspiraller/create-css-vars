@@ -1,6 +1,6 @@
 {
   "name": "@inspiraller/create-css-vars",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This converts a directory of css files into a file of variable names.",
   "keywords": [
     "convert-css-to-variables",

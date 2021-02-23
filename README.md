@@ -1,44 +1,54 @@
-# Prerequisites:
-
-- node
-- npm
-- yarn optional
-
-# Download this repo
-
+# installing via npm
 ```
-git clone ...create-css-vars
+npm i @inspiraller/create-css-vars --save
 ```
 
-# cd into folder
-
-```
-cd create-css-vars
-```
-
-# install dependencies
-
-```
-yarn install
-```
-
-or
-
-```
-npm install
-```
-
-# position your css folder locally 
+# Create a folder of css files locally 
 ```
 css /
   myfile.css
 ```
-# run 
+
+# example - 
+**myfile.css**
+```css
+.link,
+.btn {
+  border: 1px solid red;
+}
+
+.link {
+  background: red;
+}
+.link:hover {
+  color: blue;
+}
+link[x] {
+  color: pink;
+}
+@media () {
+  .link {
+    width: 100px;
+  }
+}
 ```
-create-css-vars --from=./css --to=./
+
+# Create script to run create-css-vars
+**package.json**
 ```
-# will output 
-**css-vars.ts**
+  "scripts": {
+    "start": "create-css-vars"
+  },
+```
+
+# run script 
+```
+npm start
+```
+
+# Fie is created:
+- **css-vars/ts**
+
 - a file with variables to reference the css in your styled components.
 exampe:
 ```css
@@ -61,15 +71,27 @@ const vars = {
     }
   `
 }
-
 ```
 
-# Import this variable into your styled component
+# Import this into your styled component
 ```typescript
 import vars from './css-vars';
 import styled from 'styled-components';
 const Link = styled.span`
   ${vars['.link']}
 `;
-
 ```
+
+# This will pull in the following css properties
+- All single selectors - class, id, tag
+- combined selectors - .class, something else, .x {}
+- pseudo and attribute selectors = .link:hover .link[x="something"]
+- all children = .link somechild {}
+- all media queries
+
+ # It does not output generic css like this
+ ```css
+*
+[attWithoutElem=""]
+ ```
+
