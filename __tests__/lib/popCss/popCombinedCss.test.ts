@@ -1,6 +1,7 @@
 import popCombinedCss from 'src/lib/popCss/popCombinedCss';
-import { KeyStringArr } from 'src/lib/populateObjCssPerFile';
-import { crop } from '../_utils';
+import { KeyStringArr } from 'src/types';
+import crop from 'src/lib/crop';
+import clearCssComments from 'src/lib/clearCssComents';
 
 describe('popCombinedCss', () => {
   describe('success', () => {
@@ -10,8 +11,11 @@ describe('popCombinedCss', () => {
         [strCombinedSelector]: ['color: red;']
       };
       const strSingleSelector = '.link';
-      const actual = popCombinedCss({ strSingleSelector, objCss });
-      const expected = `\$\{separateCombined('${strSingleSelector}', '${strCombinedSelector}')\}\n`;
+      const actual = clearCssComments(popCombinedCss({ strSingleSelector, objCss }), '¬');
+      // const expected = `\$\{separateCombined('${strSingleSelector}', '${strCombinedSelector}')\}\n`;
+      const expected = `
+        color: red;
+      `;
       expect(crop(actual)).toBe(crop(expected));
     });
     it('should construct 2 combined', () => {
@@ -22,11 +26,15 @@ describe('popCombinedCss', () => {
         [strCombinedSelector2]: ['color: blue;']
       };
       const strSingleSelector = '.link';
-      const actual = popCombinedCss({ strSingleSelector, objCss });
+      const actual = clearCssComments(popCombinedCss({ strSingleSelector, objCss }), '¬');
+      // const expected = `
+      //     \$\{separateCombined('${strSingleSelector}', '${strCombinedSelector1}')\}\n
+      //     \$\{separateCombined('${strSingleSelector}', '${strCombinedSelector2}')\}\n
+      //   `;
       const expected = `
-          \$\{separateCombined('${strSingleSelector}', '${strCombinedSelector1}')\}\n
-          \$\{separateCombined('${strSingleSelector}', '${strCombinedSelector2}')\}\n
-        `;
+        color: red;
+        color: blue;
+      `;
       expect(crop(actual)).toBe(crop(expected));
     });
     describe('fail', () => {

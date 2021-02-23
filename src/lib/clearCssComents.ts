@@ -1,3 +1,4 @@
+import { TFuncStr } from 'src/types';
 const clearCssComments: TFuncStr = (strAll, marker) => {
   let str = strAll;
 
@@ -12,6 +13,7 @@ const clearCssComments: TFuncStr = (strAll, marker) => {
   const regComment = RegExp(`\\/\\*[^${m1}]*\\*\\/${m1}`, 'g'); // Removes all instances of: /* anything..  */¬
   str = str.replace(regComment, '');
   str = str.replace(m1, ''); // if any remainders of marker.
+
   return str;
 };
 

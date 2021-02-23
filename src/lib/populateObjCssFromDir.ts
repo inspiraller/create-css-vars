@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import populateObjCssPerFile, { ObjCssAll } from './populateObjCssPerFile';
+import { ObjCssAll } from 'src/types';
+import populateObjCssPerFile from './constructCss/constructObjCssPerFile';
 
 type TexcludeDir = (file: string) => boolean;
 const excludeDir: TexcludeDir = file =>

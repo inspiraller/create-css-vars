@@ -1,84 +1,54 @@
-import { KeyStringArr } from '../populateObjCssPerFile';
+import { KeyStringArr } from 'src/types';
+import { popSeparateCombined } from './popSeparateCombined/popSeparateCombined';
 
 export type TpopCss = (props: { strSingleSelector: string; objCss: KeyStringArr }) => string;
 export type TarrCss = string[];
 
-// type TpopSeparate = (props: {
-//   strSelector: string;
-//   strObjCssSelectorKey: string;
-//   objCss: KeyStringArr;
-// }) => string;
+type TgetReg = (str: string) => RegExp;
 
-// const popSeparate: TpopSeparate = ({ strSelector, strObjCssSelectorKey, objCss }) => {
-//   const arrCss: TarrCss = [];
-//   const css = objCss[strObjCssSelectorKey].join();
-//   const strPseudoSelector = getPseudoSelector(strSelector, strObjCssSelectorKey);
-//   console.log('strSelector = ', strSelector);
-//   console.log('strObjCssSelectorKey = ', strObjCssSelectorKey);
-//   console.log('css = ', css);
+const getRegSingleInCombined: TgetReg = strSingleSelector =>
+  RegExp(`(^|\\,)${strSingleSelector}([\\W]|$)`);
 
-//   if (strPseudoSelector !== '') {
-//     arrCss.push(createCssPseudo(strPseudoSelector, css));
-//   } else if (strSelector.search(regSingle) !== -1) {
-//     arrCss.push(css);
-//   } else {
-//     // child or combinator...
-//     const child = getChildSelector(strSelector);
-//     arrCss.push(`& ${child} {
-//       ${css}
-//     }`);
-//   }
-//   return arrCss.join('\n');
-// };
+type TseparateCombined = (props: {
+  strSingleSelector: string;
+  strCombinedSelector: string;
+  objCss: KeyStringArr;
+}) => string;
+export const separateCombined: TseparateCombined = ({
+  strSingleSelector,
+  strCombinedSelector,
+  objCss
+}) => {
+  const regInCombined = getRegSingleInCombined(strSingleSelector);
+  return popSeparateCombined({
+    strObjCssSelectorKey: strCombinedSelector,
+    objCss,
+    regInCombined
+  });
+};
 
-// type TpopSeparateCombined = (props: {
-//   strObjCssSelectorKey: string;
-//   objCss: KeyStringArr;
-//   regInCombined: RegExp;
-// }) => string;
-
-// const cropComma: TFuncStr = str => str.substring(1, str.length - 1);
-
-// const popSeparateCombined: TpopSeparateCombined = ({
-//   strObjCssSelectorKey,
-//   objCss,
-//   regInCombined
-// }) => {
-//   const strCombinedCropComma = cropComma(strObjCssSelectorKey);
-//   const arrSelectors = strCombinedCropComma.split(',');
-//   const arrCss: TarrCss = [];
-//   arrCss.push(comment(strCombinedCropComma));
-//   return arrCss
-//     .concat(
-//       arrSelectors.map(strSelector =>
-//         strSelector.search(regInCombined) !== -1
-//           ? popSeparate({
-//               strObjCssSelectorKey,
-//               strSelector,
-//               objCss
-//             })
-//           : ''
-//       )
-//     )
-//     .join('');
-// };
+// ##############################################################################################
 
 const popCombinedCss: TpopCss = ({ strSingleSelector, objCss }) => {
   const arrCss: TarrCss = [];
   const arrKeys = Object.keys(objCss);
-  const regInCombined = RegExp(`(^|\\,)${strSingleSelector}([\\W]|$)`);
+  // console.log('strSingleSelector = ', strSingleSelector);
+  const regInCombined = getRegSingleInCombined(strSingleSelector);
 
   arrKeys.forEach(strCombinedSelector => {
     if (strCombinedSelector.search(regInCombined) !== -1) {
-      arrCss.push(`\$\{separateCombined('${strSingleSelector}', '${strCombinedSelector}')\}\n`);
-
       // arrCss.push(
-      //   popSeparateCombined({
-      //     strObjCssSelectorKey: strCombinedSelector,
-      //     objCss: objCssAll.combined,
-      //     regInCombined
-      //   })
+      //   `\$\{separateCombined({strSingleSelector: '${strSingleSelector}', strCombinedSelector: '${strCombinedSelector}', combined})\}\n`
       // );
+
+      // console.log(' match = ', strCombinedSelector, strSingleSelector);
+      arrCss.push(
+        popSeparateCombined({
+          strObjCssSelectorKey: strCombinedSelector,
+          objCss,
+          regInCombined
+        })
+      );
     }
   });
 

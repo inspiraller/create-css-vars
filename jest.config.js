@@ -38,7 +38,8 @@ module.exports = {
     'getSafeMarkers.ts',
     'archive',
     'execReg.ts',
-    'getArgs.ts'
+    'getArgs.ts',
+    'css-vars.ts'
   ],
   collectCoverageFrom: ['src/*.{t,j}s', 'src/**/*.{t,j}s'],
   coverageThreshold: {

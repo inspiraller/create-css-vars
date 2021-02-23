@@ -1,9 +1,6 @@
-import { ObjCssAll } from './populateObjCssPerFile';
-import popAllVarCss from './popCss/popAllVars';
+import { ObjCssAll, Vars } from 'src/types';
 
-interface Vars {
-  [key: string]: string;
-}
+import popAllVarCss from './popCss/popAllVars';
 
 type TcreateVarsFromObjCss = (objCssAll: ObjCssAll) => Vars;
 const createVarsFromObjCss: TcreateVarsFromObjCss = objCssAll =>

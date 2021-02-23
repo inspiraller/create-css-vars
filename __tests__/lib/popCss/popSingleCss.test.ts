@@ -1,6 +1,6 @@
 import popSingleCss from 'src/lib/popCss/popSingleCss';
-import { KeyStringArr } from 'src/lib/populateObjCssPerFile';
-import { crop } from '../_utils';
+import { KeyStringArr } from 'src/types';
+import crop from 'src/lib/crop';
 
 describe('popSingleCss', () => {
   describe('success', () => {

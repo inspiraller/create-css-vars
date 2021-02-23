@@ -1,5 +1,5 @@
 import clearCssComments from 'src/lib/clearCssComents';
-import { crop } from './_utils';
+import crop from 'src/lib/crop';
 
 describe('updateVars()', () => {
   describe('clearCssComments()', () => {

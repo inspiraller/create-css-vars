@@ -1,16 +1,16 @@
 import { TFuncStr } from 'src/types';
-import { sregPseudoOrAttr } from '../regCss';
-import { TarrCss, TpopCss } from './popCombinedCss';
+import { sregPseudoOrAttr } from 'src/lib/regCss';
+import { TarrCss, TpopCss } from 'src/lib/popCss/popCombinedCss';
 
 const regPseudo = RegExp(sregPseudoOrAttr);
 
-const createCssPseudo: TFuncStr = (strPseudoSelector, css) => `&${strPseudoSelector} {
+export const createCssPseudo: TFuncStr = (strPseudoSelector, css) => `&${strPseudoSelector} {
     ${css}
   }\n`;
 
-const getPseudoSelector: TFuncStr = strObjCssSelectorKey => {
+export const getPseudoSelector: TFuncStr = strObjCssSelectorKey => {
   const indPseudo = strObjCssSelectorKey.search(regPseudo);
-  return indPseudo ? (strObjCssSelectorKey as string).substr(indPseudo) : '';
+  return indPseudo !== -1 ? (strObjCssSelectorKey as string).substr(indPseudo) : '';
 };
 
 export const popPseudoCss: TpopCss = ({ strSingleSelector, objCss }) => {

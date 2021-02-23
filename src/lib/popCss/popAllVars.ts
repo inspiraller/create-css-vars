@@ -1,8 +1,8 @@
-import { ObjCssAll } from '../populateObjCssPerFile';
+import { ObjCssAll } from 'src/types';
 import popCombinedCss, { TarrCss } from './popCombinedCss';
 import popSingleCss from './popSingleCss';
-import popPseudoCss from './popPseudoCss';
-import popWithChildCss from './popWithChildCss';
+import popPseudoCss from './popSeparateCombined/popPseudoCss';
+import popWithChildCss from './popSeparateCombined/popWithChildCss';
 
 type TpopAllVarCss = (props: { strSingleSelector: string; objCssAll: ObjCssAll }) => string;
 

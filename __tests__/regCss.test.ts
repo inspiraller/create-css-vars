@@ -2,8 +2,9 @@ import {
   regTruncate,
   regCombined,
   regSingle,
-  regPseudoOrAttr
-  // regWithChild,
+  regPseudoOrAttr,
+  regWithChild
+  // sregWithChild
 } from 'src/lib/regCss';
 
 describe('regCss', () => {
@@ -257,6 +258,27 @@ describe('regCss', () => {
           a::p,child {}`;
           const actual = strSelector.search(regPseudoOrAttr) !== -1;
           expect(actual).toBe(true);
+        });
+      });
+    });
+    describe('regWithChild', () => {
+      describe('success', () => {
+        it('should match with child - header .child', () => {
+          // console.log('sregWithChild = ', sregWithChild);
+          const strSelector = `
+            header .child {}
+          `;
+          // console.log('sreg - match = ', strSelector.match(RegExp(sregWithChild)));
+          // console.log('match = ', strSelector.match(regWithChild));
+          const actual = strSelector.search(regWithChild) !== -1;
+          expect(actual).toBe(true);
+        });
+      });
+      describe('fail', () => {
+        it('should NOT match combinator - header, header .child', () => {
+          const strSelector = `header, header .child{}`;
+          const actual = strSelector.search(regWithChild) !== -1;
+          expect(actual).toBe(false);
         });
       });
     });

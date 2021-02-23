@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "cross-env NODE_ENV=test jest",
-    "start": "cross-env-shell babel-node --extensions '.ts,.tsx' src/index.ts --from=./testcss",
+    "start": "cross-env-shell babel-node --extensions '.ts,.tsx' src/index.ts --from=./css",
     "build": "tsc"
   },
   "dependencies": {

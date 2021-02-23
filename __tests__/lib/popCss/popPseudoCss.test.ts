@@ -1,6 +1,6 @@
-import popPseudoCss from 'src/lib/popCss/popPseudoCss';
-import { KeyStringArr } from 'src/lib/populateObjCssPerFile';
-import { crop } from '../_utils';
+import popPseudoCss from 'src/lib/popCss/popSeparateCombined/popPseudoCss';
+import { KeyStringArr } from 'src/types';
+import crop from 'src/lib/crop';
 
 describe('popPseudoCss', () => {
   describe('success', () => {

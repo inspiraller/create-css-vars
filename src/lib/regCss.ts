@@ -7,28 +7,32 @@ const sregNotCurlyOr = `[${sregNotCurly}]*`;
 export const regTruncate = /^\s*|\s*$/g;
 
 export const sregPseudoOrAttr = '[\\:\\[]';
-export const sregSingleOr = `[${sregSingle}][\\w\\-]`;
+export const sregSingleOr = `[${sregSingle}][\\w\\-]*`;
 export const sregCombinator = '\\+\\~\\>';
-export const sregWithChild = `[^\\s\\{\\,]*[${sregCombinator}]|\\s+${sregAny}+`;
+export const sregWithChild = `[^\\s\\{\\,]*([${sregCombinator}]|\\s+${sregAny}+)[${sregNotCurly}\\,]*`;
 
+// hack: regWithChild. added extra parenthsis for all regex execep regWithChild because (item|item) must be used. not item|item to match correctly group 2.
 export const regCombined = RegExp(
-  `(^|\\n)\\s*(${sregCombinedOr}${sregNotCurlyOr})\\{(${sregNotCurlyOr})\\}`,
+  `(^|\\n)\\s*(${sregCombinedOr}${sregNotCurlyOr})()\\{(${sregNotCurlyOr})\\}`,
   'ig'
 );
-export const regSingle = RegExp(`(^|\\n)\\s*(${sregSingleOr}*)\\s*\\{(${sregNotCurlyOr})\\}`, 'ig');
+export const regSingle = RegExp(
+  `(^|\\n)\\s*(${sregSingleOr})\\s*()\\{(${sregNotCurlyOr})\\}`,
+  'ig'
+);
 
 export const regWithChild = RegExp(
-  `(^|\\n)\\s*(${sregSingleOr}*${sregWithChild}${sregNotCurlyOr})\\s*\\{(${sregNotCurlyOr})\\}`,
+  `(^|\\n)\\s*(${sregSingleOr}${sregWithChild})\\s*\\{(${sregNotCurlyOr})\\}`,
   'ig'
 );
 
 export const regPseudoOrAttr = RegExp(
-  `(^|\\n)\\s*(${sregSingleOr}*${sregPseudoOrAttr}${sregNotCurlyOr})\\s*\\{(${sregNotCurlyOr})\\}`,
+  `(^|\\n)\\s*(${sregSingleOr}${sregPseudoOrAttr}${sregNotCurlyOr})\\s*()\\{(${sregNotCurlyOr})\\}`,
   'ig'
 );
 
 export const regBeginNonSingle = RegExp(
-  `(^|\\n)\\s*([\\*\\[][${sregNotCurly}\\,]*)\\{(${sregNotCurlyOr})\\}`,
+  `(^|\\n)\\s*([\\*\\[][${sregNotCurly}\\,]*)()\\{(${sregNotCurlyOr})\\}`,
   'ig'
 );
 
