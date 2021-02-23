@@ -1,5 +1,5 @@
 import { TFuncStr } from 'src/types';
-const clearCssComments: TFuncStr = (strAll, marker) => {
+const clearCssComments: TFuncStr = (strAll, marker = '¬') => {
   let str = strAll;
 
   const m1 = marker as string;

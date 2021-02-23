@@ -30,14 +30,22 @@ export interface ObjCssAll extends ObjCssAllReq {
 /*
   const objCssAll = {
     combined: {},
-    single: {},
+    single: {
+      '.item': []
+    },
     withchild: {},
     pseudo: {},
     beginNonSingle: {},
-    mediaq: {}
+    mediaq: {
+      single: {
+        '.link': ['']
+      }
+    }
   }
 */
 
 export interface Vars {
   [key: string]: string;
 }
+
+export type TarrCss = string[];

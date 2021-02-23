@@ -1,8 +1,7 @@
-import { KeyStringArr } from 'src/types';
+import { KeyStringArr, TarrCss } from 'src/types';
 import { popSeparateCombined } from './popSeparateCombined/popSeparateCombined';
 
 export type TpopCss = (props: { strSingleSelector: string; objCss: KeyStringArr }) => string;
-export type TarrCss = string[];
 
 type TgetReg = (str: string) => RegExp;
 

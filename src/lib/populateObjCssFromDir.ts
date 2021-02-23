@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { ObjCssAll } from 'src/types';
+import { ObjCssAll, TFuncStr } from 'src/types';
 import populateObjCssPerFile from './constructCss/constructObjCssPerFile';
 
 type TexcludeDir = (file: string) => boolean;

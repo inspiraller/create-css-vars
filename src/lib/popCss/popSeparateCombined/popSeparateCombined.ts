@@ -1,11 +1,10 @@
-import { TFuncStr, KeyStringArr } from 'src/types';
+import { TFuncStr, KeyStringArr, TarrCss } from 'src/types';
 import { getPseudoSelector, createCssPseudo } from './popPseudoCss';
 import { getChildSelector, createCssWithChild } from './popWithChildCss';
 
 import { sregSingleOr } from 'src/lib/regCss';
 
 export type TpopCss = (props: { strSingleSelector: string; objCss: KeyStringArr }) => string;
-export type TarrCss = string[];
 
 const regSingle = RegExp(sregSingleOr);
 

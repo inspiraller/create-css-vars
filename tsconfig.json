@@ -31,5 +31,5 @@
     ]
   },
   "exclude": ["dist", "jest.config.js", "src/index.ts"],
-  "include": [ "src", "@types", "__tests__"]
+  "include": [ "src", "@types"]
 }

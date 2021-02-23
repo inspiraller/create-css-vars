@@ -39,15 +39,16 @@ module.exports = {
     'archive',
     'execReg.ts',
     'getArgs.ts',
-    'css-vars.ts'
+    'css-vars.ts',
+    'cloneObjArr.ts'
   ],
   collectCoverageFrom: ['src/*.{t,j}s', 'src/**/*.{t,j}s'],
   coverageThreshold: {
     global: {
-      branches: 90,
-      functions: 90,
-      lines: 90,
-      statements: 90
+      branches: 60,
+      functions: 60,
+      lines: 60,
+      statements: 60
     }
   }
 };

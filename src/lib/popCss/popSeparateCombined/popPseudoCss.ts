@@ -1,6 +1,6 @@
-import { TFuncStr } from 'src/types';
+import { TFuncStr, TarrCss } from 'src/types';
 import { sregPseudoOrAttr } from 'src/lib/regCss';
-import { TarrCss, TpopCss } from 'src/lib/popCss/popCombinedCss';
+import { TpopCss } from 'src/lib/popCss/popCombinedCss';
 
 const regPseudo = RegExp(sregPseudoOrAttr);
 
