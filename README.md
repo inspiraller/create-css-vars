@@ -47,7 +47,7 @@ npm start
 ```
 
 # Fie is created:
-- **css-vars/ts**
+- **css-vars.ts**
 
 - a file with variables to reference the css in your styled components.
 exampe:
@@ -93,5 +93,7 @@ const Link = styled.span`
  ```css
 *
 [attWithoutElem=""]
+@font-face
+:root 
  ```
 
