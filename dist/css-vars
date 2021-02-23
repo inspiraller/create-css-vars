@@ -1,0 +1,8 @@
+
+    interface Vars {
+      [key: string]: string;
+    }
+    export const vars: Vars = {
+
+};
+  

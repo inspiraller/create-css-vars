@@ -20,7 +20,7 @@ const convertObjStrToStr: TconvertObjStrToStr = vars =>
 //     return `${accum}  ['${cur}']: \`${css}\`\n`;
 //   }, '');
 
-type TconvertVarsToStr = (vars: Vars, combined: KeyStringArr) => string;
+// type TconvertVarsToStr = (vars: Vars, combined: KeyStringArr) => string;
 // const convertVarsToStr: TconvertVarsToStr = (vars, combined) => {
 //   return `
 //     interface Vars {
@@ -55,7 +55,8 @@ type TconvertVarsToStr = (vars: Vars, combined: KeyStringArr) => string;
 //   `;
 // };
 
-const convertVarsToStr: TconvertVarsToStr = (vars, combined) => {
+type TconvertVarsToStr = (vars: Vars) => string;
+const convertVarsToStr: TconvertVarsToStr = vars => {
   return `
     interface Vars {
       [key: string]: string;
@@ -70,20 +71,22 @@ const cli: Tcli = args => {
   const from = objArgs.from;
   const to = objArgs.to;
 
+  const cwd = process.cwd();
+
   let pathIn = '';
   if (from) {
-    pathIn = fs.existsSync(from) ? from : path.resolve(__dirname, from);
+    pathIn = fs.existsSync(from) ? from : path.resolve(cwd, from);
   }
   if (!fs.existsSync(pathIn)) {
-    pathIn = path.resolve(__dirname);
+    pathIn = path.resolve(cwd);
   }
 
   let pathOut = '';
   if (to) {
-    pathOut = fs.existsSync(to) ? to : path.resolve(__dirname, to);
+    pathOut = fs.existsSync(to) ? to : path.resolve(cwd, to);
   }
   if (!fs.existsSync(pathOut)) {
-    pathOut = path.resolve(__dirname);
+    pathOut = path.resolve(cwd);
   }
 
   const objCssAll = populateObjCssFromDir(pathIn);
@@ -93,7 +96,11 @@ const cli: Tcli = args => {
   // console.log('objCssAll.combined = ', objCssAll.combined);
   // console.log('vars = ', vars);
 
-  const strVars = convertVarsToStr(vars, objCssAll.combined);
+  const strVars = convertVarsToStr(vars);
+
+  if (!strVars) {
+    console.log('There is no css!!');
+  }
   //console.log('strVars = ', strVars);
 
   const outFile = 'css-vars.ts';
@@ -102,7 +109,7 @@ const cli: Tcli = args => {
     if (err) {
       throw err;
     }
-    console.log(`File: "${pathOut}${outFile}" created successfully.`);
+    console.log(`File: "${pathOut}\\${outFile}" created successfully.`);
   });
 
   return 'hello';
