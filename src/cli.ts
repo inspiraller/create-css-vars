@@ -3,7 +3,7 @@ import path from 'path';
 
 import getArgs from './lib/getArgs';
 
-import { KeyStringArr, Vars } from 'src/types';
+import { Vars } from 'src/types';
 
 import populateObjCssFromDir from './lib/populateObjCssFromDir';
 import createVarsFromPopCss from './lib/createVarsFromPopCss';
