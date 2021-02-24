@@ -1,0 +1,65 @@
+@media (max-width:1427px){
+  .all {
+    padding: 0 0 25px;
+  }
+}
+
+.l-wrap {
+  display: flex;
+  margin: 0 auto;
+  width: 1428px;
+}
+
+@media (max-width:1427px){
+  .l-wrap {
+    width: 600px;
+  }
+}
+
+@media (max-width:600px){
+  .l-wrap {
+    width: 100%;
+  }
+}
+
+.l-asidepad {
+  margin: 0 60px;
+}
+
+
+@media (max-width:1427px){
+  .l-asidepad {
+    margin: 0 24px;
+  }
+}
+
+aside {
+  padding: 40px 96px 190px 96px;
+  width: 928px;
+}
+
+
+@media (max-width:1427px){
+  .l-wrap {
+    display: block;
+  }
+
+  aside {
+    padding: 0;
+    width: auto;
+    display: block;
+    min-width: 386px;
+  }
+}
+
+article {
+  position: relative;
+}
+
+main {
+  max-width: 500px; /* fix ie11 h1 stretching large */
+  position: relative;
+}
+
+
+

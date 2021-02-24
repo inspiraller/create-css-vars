@@ -1,0 +1,82 @@
+
+.l-align--textcenter {
+  text-align: center;
+}
+
+.l-align--center {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.l-align--vcenter {
+  display: flex;
+  align-items: center;
+}
+
+.l-align--hcenter {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+
+.l-vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.l-between,
+.l-between--center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.l-align--vtop {
+  display: flex;
+  align-items: flex-start;
+}
+.l-align--spacearound {
+  justify-content: space-around;
+}
+.l--baseline {
+  align-items: baseline;
+}
+
+/* keeping middle centered */
+.l-between--center > .l-align--left,
+.l-between--center > .l-align--right {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+/* fix for center */
+.l-align--right {
+  text-align: right;
+}
+
+.l-baseline {
+  display: flex;
+  align-items: baseline;
+}
+
+.l-baseline > * {
+  margin: 0 0 0 14px;
+}
+.l-baseline-xspace > * {
+  margin: 0 0 0 20px;
+}
+.l-baseline > *:first-child {
+  margin: 0;
+}
+
+.l-vertical--reverse3 > *  {
+  order: 20;
+}
+.l-vertical--reverse3 > *:first-child {
+  order: 30;
+}
+.l-vertical--reverse3 > *:last-child  {
+  order: 10;
+}

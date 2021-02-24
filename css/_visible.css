@@ -1,0 +1,13 @@
+
+@media (max-width:1427px) { 
+  .visible--lg {
+    display: none;
+  }
+}
+
+@media (min-width:1428px) { 
+  .visible--sm {
+    display: none;
+  }
+}
+

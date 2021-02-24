@@ -1,0 +1,22 @@
+
+.investment__target {
+  color: var(--l-90); 
+  line-height: 3.45rem; /* match h1 */
+}
+
+.investment__percentage-bg {
+  display: block;
+  background: var(--l-10);
+  height: 12px;
+  width: 100%;
+  border-radius: 6px;
+}
+
+.investment__percentage-fill {
+  background: var(--primary-green); /* primary green */
+  height: 100%;
+  border-radius: 6px;
+}
+.percent {
+  color: var(--l-90); 
+}

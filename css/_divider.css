@@ -1,0 +1,11 @@
+
+.divider {
+  border-bottom : 1px solid #CDCDD6; /* shade40 */
+  padding-bottom: 24px;
+}
+
+.l-asidepad.divider {
+  border-top : 1px solid #CDCDD6; /* shade40 */
+  padding-bottom: 0;
+  border-bottom: 0;
+}

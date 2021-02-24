@@ -11,7 +11,9 @@ import {
 import constructCombinedObjCss, { Tconstruct } from './constructCombinedObjCss';
 import constructAnyObjCss from './constructAnyObjCss';
 
-import { KeyStringArr, ObjCssAll } from 'src/types';
+import { KeyStringArr, ObjCssAll , TFuncStr} from 'src/types';
+
+export const replaceVars: TFuncStr = str => str.replace(/var\((--[^\)]*)\)/g, '${getTheme(\'$1\')}');
 
 type TiterateConstructObjCss = (pros: {
   objCss: KeyStringArr;
@@ -30,8 +32,9 @@ const iterateConstructObjCss: TiterateConstructObjCss = ({
     str,
     reg,
     callback: arrM => {
-      const strCss = arrM[4]; // hack: regWithChild. would be group 3, not 4.
+      let strCss = arrM[4]; // hack: regWithChild. would be group 3, not 4.
       const strSelectors = arrM[2];
+      strCss = replaceVars(strCss);
       objCss = constructCssObj({ objCss, strSelectors, strCss });
     }
   });

@@ -1,9 +1,9 @@
-import popAllVars from 'src/lib/popCss/popAllVars';
+import popAllSelectors from 'src/lib/popCss/popAllSelectors';
 import { ObjCssAll } from 'src/types';
 import crop from 'src/lib/crop';
 import clearCssComments from 'src/lib/clearCssComents';
 
-describe('popAllVars', () => {
+describe('popAllSelectors', () => {
   describe('success', () => {
     it('should construct 1 pseudo', () => {
       const strSingleSelector = '.item';
@@ -25,7 +25,7 @@ describe('popAllVars', () => {
         mediaq: {}
       };
 
-      const actual = clearCssComments(popAllVars({ strSingleSelector, objCssAll }), '¬');
+      const actual = clearCssComments(popAllSelectors({ strSingleSelector, objCssAll }), '¬');
 
       //  \$\{separateCombined('${strSingleSelector}', '${strCombinedKey}')\}
       const expected = `

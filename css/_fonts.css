@@ -1,0 +1,64 @@
+@font-face {
+  font-family: 'sharp_sanssemibold';
+  src: url('fonts/sharpsans/sharp_sans_semibold-webfont.woff2') format('woff2'),
+       url('fonts/sharpsans/sharp_sans_semibold-webfont.woff') format('woff');
+}
+@font-face {
+  font-family: 'sharp_sansbold';
+  src: url('fonts/sharpsans/sharpsans-bold-webfont.woff2') format('woff2'),
+       url('fonts/sharpsans/sharpsans-bold-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'sharp_sansmedium';
+  src: url('fonts/sharpsans/sharpsans-medium-webfont.woff2') format('woff2'),
+       url('fonts/sharpsans/sharpsans-medium-webfont.woff') format('woff');
+}
+@font-face {
+  font-family: 'sharp_sansextrabold';
+  src: url('fonts/sharpsans/sharpsans-extrabold-webfont.woff2') format('woff2'),
+       url('fonts/sharpsans/sharpsans-extrabold-webfont.woff') format('woff');
+}
+
+
+@font-face {
+  font-family: 'mint-medium'; /* semi bold ?*/
+  src: url('fonts/MintGrotesk/MintGroteskV1.0-Medium.woff2') format('woff2'),
+       url('fonts/MintGrotesk/MintGroteskV1.0-Medium.woff') format('woff');
+}
+@font-face {
+  font-family: 'mint-bold';
+  src: url('fonts/MintGrotesk/MintGroteskV1.0-Bold.woff2') format('woff2'),
+       url('fonts/MintGrotesk/MintGroteskV1.0-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'mint-regular';
+  src: url('fonts/MintGrotesk/MintGroteskV1.0-Regular.woff2') format('woff2'),
+       url('fonts/MintGrotesk/MintGroteskV1.0-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'mint-extrabold';
+  src: url('fonts/MintGrotesk/MintGroteskV1.0-ExtraBold.woff2') format('woff2'),
+       url('fonts/MintGrotesk/MintGroteskV1.0-ExtraBold.woff') format('woff');
+}
+
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+}
+
+body,
+input,
+textarea,
+button {
+  font-family: 'sharp_sansmedium';
+  font-size: 1.4rem;
+}

@@ -1,5 +1,5 @@
 import { MediaQ, TFuncStr } from 'src/types';
-import popAllVarCss from './popAllVars';
+import popAllVarCss from './popAllSelectors';
 
 const createMediaQ: TFuncStr = (strMediaQ, css) => `
  ${strMediaQ} {

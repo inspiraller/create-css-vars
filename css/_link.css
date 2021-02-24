@@ -1,0 +1,56 @@
+.link,
+.link span,
+.link path {
+  transition: all 0.2s;
+}
+
+.link {
+  position: relative;
+  text-decoration: none;
+}
+
+.link:hover {
+  border: 0;
+  color: var(--primary-green);
+}
+.link:hover span {
+  color: var(--primary-green);
+} 
+
+.link:hover path {
+  stroke: var(--primary-green);
+}
+
+.link:hover path[fill] {
+  fill: var(--primary-green);
+}
+
+/********************************/
+.link--underline:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: -4px;
+  border-bottom: 2px solid black;
+  transition: width 0.1s, left 0.1s, border 0.1s;
+}
+
+.link--underline:hover:after {
+  left: 8px;
+  width: calc(100% - 16px);
+  border-color: var(--primary-green);
+}
+
+/********************************/
+.link:disabled {
+  color: var(--l-80);
+}
+.link:disabled:after {
+  border-color: var(--l-80);
+}
+.link:disabled:hover {
+  left: 0;
+  width: 100%;
+}
+/**********************************/

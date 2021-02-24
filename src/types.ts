@@ -2,6 +2,9 @@ export type TFuncStr = (str: string, str2?: string) => string;
 export interface KeyStringArr {
   [key: string]: string[];
 }
+export type TKeyString = {
+  [index: string]: string;
+};
 
 export interface ObjCssAllReq {
   combined: KeyStringArr;
@@ -44,7 +47,7 @@ export interface ObjCssAll extends ObjCssAllReq {
   }
 */
 
-export interface Vars {
+export interface Selectors {
   [key: string]: string;
 }
 

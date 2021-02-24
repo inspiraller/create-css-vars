@@ -2,6 +2,9 @@ export declare type TFuncStr = (str: string, str2?: string) => string;
 export interface KeyStringArr {
     [key: string]: string[];
 }
+export declare type TKeyString = {
+    [index: string]: string;
+};
 export interface ObjCssAllReq {
     combined: KeyStringArr;
     single: KeyStringArr;
@@ -22,7 +25,7 @@ export interface MediaQ {
 export interface ObjCssAll extends ObjCssAllReq {
     mediaq: MediaQ;
 }
-export interface Vars {
+export interface Selectors {
     [key: string]: string;
 }
 export declare type TarrCss = string[];
