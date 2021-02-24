@@ -1,6 +1,6 @@
 const sregSingle = 'a-zA-Z\\#\\.';
 const sregAny = `[${sregSingle}\\[\\]\\=\\-\\'\\"\\|\\*\\(\\)\\:>\\+\\~\\$]`;
-const sregCombinedOr = `${sregAny}+[^\\{\\,]*\\,\\s*${sregAny}+`;
+const sregCombinedOr = `${sregAny}+[^\\{\\,\\}]*\\,\\s*${sregAny}+`;
 const sregNotCurly = '^\\{\\}';
 const sregNotCurlyOr = `[${sregNotCurly}]*`;
 
@@ -9,7 +9,7 @@ export const regTruncate = /^\s*|\s*$/g;
 export const sregPseudoOrAttr = '[\\:\\[]';
 export const sregSingleOr = `[${sregSingle}][\\w\\-]*`;
 export const sregCombinator = '\\+\\~\\>';
-export const sregWithChild = `[^\\s\\{\\,]*([${sregCombinator}]|\\s+${sregAny}+)[${sregNotCurly}\\,]*`;
+export const sregWithChild = `[^\\s\\{\\,\\}]*([${sregCombinator}]|\\s+${sregAny}+)[${sregNotCurly}\\,]*`;
 
 // hack: regWithChild. added extra parenthsis for all regex execep regWithChild because (item|item) must be used. not item|item to match correctly group 2.
 export const regCombined = RegExp(

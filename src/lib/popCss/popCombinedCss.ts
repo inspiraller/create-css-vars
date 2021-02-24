@@ -40,7 +40,7 @@ const popCombinedCss: TpopCss = ({ strSingleSelector, objCss }) => {
       //   `\$\{separateCombined({strSingleSelector: '${strSingleSelector}', strCombinedSelector: '${strCombinedSelector}', combined})\}\n`
       // );
 
-      // console.log(' match = ', strCombinedSelector, strSingleSelector);
+      // console.log('popCombinedCss() match = ', strCombinedSelector, strSingleSelector);
       arrCss.push(
         popSeparateCombined({
           strObjCssSelectorKey: strCombinedSelector,

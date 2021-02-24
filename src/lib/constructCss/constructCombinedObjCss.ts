@@ -13,6 +13,7 @@ const concatCombinedSelectors: TconcatCombinedSelectors = strSelectors =>
   strSelectors.split(',').map(sel => sel.replace(regTruncate, ''));
 
 const constructCombinedObjCss: Tconstruct = ({ objCss, strSelectors, strCss }) => {
+  // console.log(`constructCombinedObjCss() strSelectors =#"${strSelectors}"#`);
   const arrSelectors = concatCombinedSelectors(strSelectors);
   if (arrSelectors.length > 1) {
     const strCombineSelector = ',' + arrSelectors.join(',') + ',';
