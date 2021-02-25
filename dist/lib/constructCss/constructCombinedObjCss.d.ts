@@ -1,8 +1,3 @@
-import { KeyStringArr } from 'src/types';
-export declare type Tconstruct = (props: {
-    objCss: KeyStringArr;
-    strSelectors: string;
-    strCss: string;
-}) => KeyStringArr;
+import { Tconstruct } from 'src/types';
 declare const constructCombinedObjCss: Tconstruct;
 export default constructCombinedObjCss;

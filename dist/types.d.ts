@@ -25,6 +25,11 @@ export interface MediaQ {
 export interface ObjCssAll extends ObjCssAllReq {
     mediaq: MediaQ;
 }
+export declare type Tconstruct = (props: {
+    objCss: KeyStringArr;
+    strSelectors: string;
+    strCss: string;
+}) => KeyStringArr;
 export interface Selectors {
     [key: string]: string;
 }

@@ -46,7 +46,7 @@ const populateObjCssFromDir: TpopulateObjCssFromDir = (
     if (stat.isFile()) {
       if (file.search(/\.css$/) !== -1) {
         const str = readFile(path.resolve(pathIn, file));
-        objCssAll = constructObjCssPerFile(str, objCssAll);
+        objCssAll = constructObjCssPerFile(str, objCssAll) as ObjCssAll;
       }
     } else if (stat.isDirectory()) {
       if (!excludeDir(file)) {
