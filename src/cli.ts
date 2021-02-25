@@ -51,13 +51,12 @@ const cli: Tcli = args => {
   }
 
   const objCssAll = populateObjCssFromDir(pathIn);
-  console.log('cli.ts - objCssAll.mediaq = ', objCssAll.mediaq);
-  const selectors = createSelectorsFromPopCss(objCssAll);
-
+  // console.log('cli.ts - objCssAll.mediaq = ', objCssAll.mediaq);
   // console.log('objCssAll.pseudo = ', objCssAll.pseudo);
   // console.log('objCssAll.combined = ', objCssAll.combined);
   // console.log('selectors = ', selectors);
 
+  const selectors = createSelectorsFromPopCss(objCssAll);
   const strSelectors = convertSelectorsToStr(selectors);
 
   if (!strSelectors) {
