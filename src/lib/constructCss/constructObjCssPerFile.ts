@@ -1,6 +1,6 @@
 import getSafMarkers from 'src/lib/getSafeMarkers';
 import clearCssComments from 'src/lib/clearCssComents';
-import execReg from 'src/lib/execReg';
+
 import {
   regCombined,
   regSingle,
@@ -8,40 +8,15 @@ import {
   regPseudoOrAttr,
   regBeginNonSingle
 } from 'src/lib/regCss';
-import constructCombinedObjCss, { Tconstruct } from './constructCombinedObjCss';
+
+import execConstructObjCss from './execConstructObjCss';
+import constructCombinedObjCss from './constructCombinedObjCss';
 import constructAnyObjCss from './constructAnyObjCss';
+import iterateConstructMediaQObjCss from './iterateConstructMediaQObjCss';
 
-import { KeyStringArr, ObjCssAll , TFuncStr} from 'src/types';
+import { ObjCssAll, MediaQ, KeyStringArr } from 'src/types';
 
-export const replaceVars: TFuncStr = str => str.replace(/var\((--[^\)]*)\)/g, '${getTheme(\'$1\')}');
-
-type TiterateConstructObjCss = (pros: {
-  objCss: KeyStringArr;
-  str: string;
-  reg: RegExp;
-  constructCssObj: Tconstruct;
-}) => KeyStringArr;
-const iterateConstructObjCss: TiterateConstructObjCss = ({
-  objCss: objCssByRef,
-  str,
-  reg,
-  constructCssObj
-}) => {
-  let objCss = { ...objCssByRef };
-  execReg({
-    str,
-    reg,
-    callback: arrM => {
-      let strCss = arrM[4]; // hack: regWithChild. would be group 3, not 4.
-      const strSelectors = arrM[2];
-      strCss = replaceVars(strCss);
-      objCss = constructCssObj({ objCss, strSelectors, strCss });
-    }
-  });
-  return objCss;
-};
-
-type TconstructObjCssPerFile = (strReadFile: string, objCssAll: ObjCssAll) => ObjCssAll;
+type TconstructObjCssPerFile = (strReadFile: string, objCssAll: ObjCssAll | MediaQ) => ObjCssAll | MediaQ;
 const constructObjCssPerFile: TconstructObjCssPerFile = (strReadFile, objCssAll) => {
   let str = strReadFile;
   const {
@@ -49,36 +24,44 @@ const constructObjCssPerFile: TconstructObjCssPerFile = (strReadFile, objCssAll)
   } = getSafMarkers(str);
   str = clearCssComments(str, m1);
 
-  objCssAll.combined = iterateConstructObjCss({
-    objCss: objCssAll.combined,
+  objCssAll.combined = execConstructObjCss({
+    objCss: objCssAll.combined as KeyStringArr || {} as KeyStringArr,
     str,
     reg: regCombined,
     constructCssObj: constructCombinedObjCss
   });
 
-  objCssAll.single = iterateConstructObjCss({
-    objCss: objCssAll.single,
+  objCssAll.single = execConstructObjCss({
+    objCss: objCssAll.single as KeyStringArr || {} as KeyStringArr,
     str,
     reg: regSingle,
     constructCssObj: constructAnyObjCss
   });
 
-  objCssAll.withchild = iterateConstructObjCss({
-    objCss: objCssAll.withchild,
+  objCssAll.withchild = execConstructObjCss({
+    objCss: objCssAll.withchild as KeyStringArr || {} as KeyStringArr,
     str,
     reg: regWithChild,
     constructCssObj: constructAnyObjCss
   });
 
-  objCssAll.pseudo = iterateConstructObjCss({
-    objCss: objCssAll.pseudo,
+  objCssAll.pseudo = execConstructObjCss({
+    objCss: objCssAll.pseudo as KeyStringArr || {} as KeyStringArr,
     str,
     reg: regPseudoOrAttr,
     constructCssObj: constructAnyObjCss
   });
 
-  objCssAll.beginNonSingle = iterateConstructObjCss({
-    objCss: objCssAll.beginNonSingle,
+  if (objCssAll.mediaq) {
+    objCssAll.mediaq = iterateConstructMediaQObjCss({
+      objCssMediaQ: objCssAll.mediaq as MediaQ,
+      str,
+      m1
+    });
+  }
+
+  objCssAll.beginNonSingle = execConstructObjCss({
+    objCss: objCssAll.beginNonSingle as KeyStringArr || {} as KeyStringArr,
     str,
     reg: regBeginNonSingle,
     constructCssObj: constructAnyObjCss

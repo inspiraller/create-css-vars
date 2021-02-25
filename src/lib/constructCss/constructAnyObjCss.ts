@@ -1,4 +1,4 @@
-import { Tconstruct } from './constructCombinedObjCss';
+import { Tconstruct } from 'src/types';
 
 export const constructAnyObjCss: Tconstruct = ({ objCss, strSelectors, strCss }) => {
   let strSelector = strSelectors;

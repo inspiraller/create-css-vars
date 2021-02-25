@@ -1,12 +1,6 @@
 import { regTruncate } from '../regCss';
-import { KeyStringArr } from 'src/types';
+import { Tconstruct } from 'src/types';
 import constructAnyObjCss from './constructAnyObjCss';
-
-export type Tconstruct = (props: {
-  objCss: KeyStringArr;
-  strSelectors: string;
-  strCss: string;
-}) => KeyStringArr;
 
 type TconcatCombinedSelectors = (strSelectors: string) => string[];
 const concatCombinedSelectors: TconcatCombinedSelectors = strSelectors =>

@@ -24,7 +24,7 @@ describe('popWMediaQCss', () => {
     });
     it('should construct - MediaQuery - of combined', () => {
       const objCss: MediaQ = {
-        '@media()': {
+        '@media ()': {
           combined: {
             '.link,elem': ['color: red;']
           }
@@ -33,10 +33,34 @@ describe('popWMediaQCss', () => {
       const strSingleSelector = '.link';
       const actual = clearCssComments(popMediaQCss({ strSingleSelector, objCss }));
       const expected = `
-        @media() {
+        @media () {
           color: red;
         }
       `;
+      expect(crop(actual)).toBe(crop(expected));
+    });
+    it ('should render multiple combined', () => {
+      const objCss: MediaQ = {
+        '@media (max-width:1427px)': {
+          combined: {
+            '.btn--link,.btn--link path,.btn--link circle': ['color: blue;\n']
+          }
+        }
+      };
+      const strSingleSelector = '.btn--link';
+      const actual = clearCssComments(popMediaQCss({ strSingleSelector, objCss }));
+      const expected = `
+        @media (max-width:1427px) {
+          color: blue;
+          & path {
+            color: blue;
+          }
+          & circle {
+            color: blue;
+          }
+        }
+      `;
+      // console.log(`actual ###="${actual}"###`);
       expect(crop(actual)).toBe(crop(expected));
     });
   });

@@ -30,6 +30,12 @@ export interface ObjCssAll extends ObjCssAllReq {
   mediaq: MediaQ;
 }
 
+export type Tconstruct = (props: {
+  objCss: KeyStringArr;
+  strSelectors: string;
+  strCss: string;
+}) => KeyStringArr;
+
 /*
   const objCssAll = {
     combined: {},

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { ObjCssAll, TFuncStr } from 'src/types';
-import populateObjCssPerFile from './constructCss/constructObjCssPerFile';
+import constructObjCssPerFile from './constructCss/constructObjCssPerFile';
 
 type TexcludeDir = (file: string) => boolean;
 const excludeDir: TexcludeDir = file =>
@@ -46,7 +46,7 @@ const populateObjCssFromDir: TpopulateObjCssFromDir = (
     if (stat.isFile()) {
       if (file.search(/\.css$/) !== -1) {
         const str = readFile(path.resolve(pathIn, file));
-        objCssAll = populateObjCssPerFile(str, objCssAll);
+        objCssAll = constructObjCssPerFile(str, objCssAll);
       }
     } else if (stat.isDirectory()) {
       if (!excludeDir(file)) {
