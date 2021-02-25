@@ -51,7 +51,7 @@ const cli: Tcli = args => {
   }
 
   const objCssAll = populateObjCssFromDir(pathIn);
-  // console.log('cli.ts - objCssAll.mediaq = ', objCssAll.mediaq);
+  console.log('cli.ts - objCssAll = ', objCssAll);
   // console.log('objCssAll.pseudo = ', objCssAll.pseudo);
   // console.log('objCssAll.combined = ', objCssAll.combined);
   // console.log('selectors = ', selectors);

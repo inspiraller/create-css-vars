@@ -33,14 +33,18 @@ export const getChildSelector: TFuncStr = strObjCssSelectorKey => {
 export const popWithChildCss: TpopCss = ({ strSingleSelector, objCss }) => {
   const arrCss: TarrCss = [];
   const regInside = RegExp(`${strSingleSelector}${sregWithChild}`);
+  // console.log('####################################### popWithChildCss()');
+  // console.log('strSingleSelector = ', strSingleSelector);
   Object.keys(objCss).forEach(strEachSelector => {
     if (strEachSelector.search(regInside) !== -1) {
       const strChildSelector = getChildSelector(strEachSelector);
+      // console.log('strChildSelector = ', strChildSelector);
       const css = objCss[strEachSelector].join('\n');
       const cssWithChild = createCssWithChild(strChildSelector, css);
       arrCss.push(cssWithChild);
     }
   });
+
   return arrCss.join('');
 };
 

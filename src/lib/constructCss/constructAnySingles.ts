@@ -1,6 +1,6 @@
 import { Tconstruct } from 'src/types';
 
-export const constructSinglesWithOnlyMediaQ: Tconstruct = ({ objCss, strSelectors }) => {
+export const constructAnySingles: Tconstruct = ({ objCss, strSelectors }) => {
   let strSelector = strSelectors;
   strSelector = strSelector.replace(/\s*$/, '');
   if (!objCss[strSelector]) {
@@ -9,4 +9,4 @@ export const constructSinglesWithOnlyMediaQ: Tconstruct = ({ objCss, strSelector
   return objCss;
 };
 
-export default constructSinglesWithOnlyMediaQ;
+export default constructAnySingles;

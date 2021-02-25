@@ -8,3 +8,4 @@ export declare const regSingle: RegExp;
 export declare const regWithChild: RegExp;
 export declare const regPseudoOrAttr: RegExp;
 export declare const regBeginNonSingle: RegExp;
+export declare const regMatchAnySingle: RegExp;

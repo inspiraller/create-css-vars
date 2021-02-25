@@ -6,13 +6,14 @@ import {
   regSingle,
   regWithChild,
   regPseudoOrAttr,
-  regBeginNonSingle
+  regBeginNonSingle,
+  regMatchAnySingle
 } from 'src/lib/regCss';
 import markEndCurly from 'src/lib/markEndCurly';
 import execConstructObjCss from './execConstructObjCss';
 import constructCombinedObjCss from './constructCombinedObjCss';
 import constructAnyObjCss from './constructAnyObjCss';
-import constructSinglesWithOnlyMediaQ from './constructSinglesWithOnlyMediaQ';
+import constructAnySingles from './constructAnySingles';
 
 import iterateConstructMediaQObjCss from './iterateConstructMediaQObjCss';
 
@@ -33,6 +34,13 @@ const constructObjCssPerFile: TconstructObjCssPerFile = (strReadFile, objCssAll,
   } = getSafMarkers(str);
   str = clearCssComments(str, m1);
 
+  objCssAll.single = execConstructObjCss({
+    objCss: objCssAll.single as KeyStringArr || {} as KeyStringArr,
+    str: str,
+    reg: regMatchAnySingle,
+    constructCssObj: constructAnySingles
+  });
+
   const strExcludeMediaQ = !isMediaQ ? replaceMediaQ(str, m1) : str;
   objCssAll.combined = execConstructObjCss({
     objCss: objCssAll.combined as KeyStringArr || {} as KeyStringArr,
@@ -46,13 +54,6 @@ const constructObjCssPerFile: TconstructObjCssPerFile = (strReadFile, objCssAll,
     str: strExcludeMediaQ,
     reg: regSingle,
     constructCssObj: constructAnyObjCss
-  });
-
-  objCssAll.single = execConstructObjCss({
-    objCss: objCssAll.single as KeyStringArr || {} as KeyStringArr,
-    str: str,
-    reg: regSingle,
-    constructCssObj: constructSinglesWithOnlyMediaQ
   });
 
   objCssAll.withchild = execConstructObjCss({

@@ -252,12 +252,12 @@ describe('regCss', () => {
           expect(actual).toBe(true);
         });
       });
-      describe('success', () => {
+      describe('fail', () => {
         it('should NOT match combined = a::p,child', async () => {
           const strSelector = `
           a::p,child {}`;
           const actual = strSelector.search(regPseudoOrAttr) !== -1;
-          expect(actual).toBe(true);
+          expect(actual).toBe(false);
         });
       });
     });

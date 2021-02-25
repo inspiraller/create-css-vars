@@ -36,5 +36,33 @@ describe('constructCombinedObjCss() - ,header,section,aside .child,', () => {
       const expected: KeyStringArr = {};
       expect(actual).toEqual(expected);
     });
+    // it('should NOT mess up multiple pseudo', () => {
+    //   const strCss = `
+    //     /* 298px */
+    //     .search__form {
+    //       margin: 13px 0;
+    //     }
+    //     .search__form:hover input {
+    //       color: var(--primary-green);
+    //     }
+    //     .search__form:hover {
+    //       color: var(--primary-green);
+    //     }
+    //     .search__button path,
+    //     .search__button circle {
+    //       transition: stroke 0.2s;
+    //     }
+    //
+    //     .search__form:hover svg path,
+    //     .search__form:hover svg circle {
+    //       stroke: var(--primary-green);
+    //     }
+    //   `;
+    //   const objCss: KeyStringArr = {};
+    //   const strSelectors = '.search__form';
+    //   const actual = constructCombinedObjCss({ objCss, strSelectors, strCss });
+    //   const expected: KeyStringArr = {};
+    //   expect(actual).toEqual(expected);
+    // });
   });
 });
