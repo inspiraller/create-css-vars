@@ -25,6 +25,7 @@ css /
 }
 link[x] {
   color: pink;
+  border: var(--primary-border);
 }
 @media () {
   .link {
@@ -58,10 +59,13 @@ npm start
 - **css-vars.ts**
 
 - a file with variables to reference the css in your styled components.
-exampe:
-```css
+- Notice, the replacement of var to getTheme()
+- You can then extract the css from this passing your getTheme method to pull the variable from your theme variable.
+
+**example:**
+```typescript
 const vars = {
-  '.link': `
+  '.link': getTheme => `
 
     /* combined - .link, .btn*/
     border: 1px solid red;
@@ -73,6 +77,7 @@ const vars = {
     }
     [x] {
       color: pink;
+      border: ${getTheme('--primary-border')};
     }
     @media () {
       width: 100px;
@@ -83,10 +88,17 @@ const vars = {
 
 # Import this into your styled component
 ```typescript
-import vars from './css-vars';
+import selectors from './css-vars';
 import styled from 'styled-components';
+
+const mytheme = {
+  '--primary-border': red
+};
+
+const getTheme = var => mytheme[var];
+
 const Link = styled.span`
-  ${vars['.link']}
+  ${selectors['.link'](getTheme)}
 `;
 ```
 
