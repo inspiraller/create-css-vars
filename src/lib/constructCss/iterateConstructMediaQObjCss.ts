@@ -8,6 +8,10 @@ type TappendToMediaQChild = (props: {objBuild: ObjCssAllOptional, objGet: ObjCss
 const appendToMediaQChild: TappendToMediaQChild  = ({objBuild: objBuildRef, objGet, strChild}) => {
   const objBuild = {...objBuildRef};
   const strKeyChild = strChild as keyof typeof objBuild;
+
+  // console.log('¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬')
+  // console.log('append() strKeyChild = ', strKeyChild);
+  // console.log('objBuild[strKeyChild] =', objBuild[strKeyChild]);
   if (objBuild[strKeyChild]) {
     const objCss: KeyStringArr = objBuild[strKeyChild] as KeyStringArr;
     objBuild[strKeyChild] = Object.keys(objCss).reduce((accumRef, cur) => {
@@ -30,6 +34,7 @@ export type TiterateConstructMediaQObjCss = (props: {
   objCssMediaQ: MediaQ;
   str: string;
   m1: string;
+  m2: string;
 }) => MediaQ;
 
 
@@ -37,12 +42,16 @@ export function deepClone<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj)) as T;
 }
 
-const iterateConstructMediaQObjCss: TiterateConstructMediaQObjCss = ({ objCssMediaQ: objCssMediaQRef, str: strUnmarked, m1 }) => {
+const iterateConstructMediaQObjCss: TiterateConstructMediaQObjCss = ({ objCssMediaQ: objCssMediaQRef, str: strUnmarked, m1, m2 }) => {
+
+  // console.log('################################# each file ####################################################');
   let objCssMediaQ = {...objCssMediaQRef};
 
-  const str = markEndCurly(strUnmarked, m1);
+  const str = markEndCurly(strUnmarked, m1, m2);
+  // console.log(`str marked =###"${str}###"`);
+
   const regMediaQ = RegExp(
-    `(^|\\n)\\s*(\\@media[^\\{\\}]*)()\\{([^${m1}]*)\\}${m1}`,
+    `(^|\\n)\\s*(\\@media[^\\{\\}]*)()\\{([^\\${m2}]*)\\}${m2}`,
     'ig'
   );
 
@@ -54,7 +63,8 @@ const iterateConstructMediaQObjCss: TiterateConstructMediaQObjCss = ({ objCssMed
     constructCssObj: constructAnyObjCss
   });
 
-  // console.log('################################# each file ####################################################');
+  // console.log('objMediaContent = ', objMediaContent);
+
   // console.log('iterateConstructMediaQObjCss() existing = objCssMediaQ = ', objCssMediaQ);
   objCssMediaQ = Object.keys(objMediaContent).reduce((accumRef, cur) => {
     // console.log(`_____________________ cur = ${cur} _________________________`);
@@ -65,6 +75,7 @@ const iterateConstructMediaQObjCss: TiterateConstructMediaQObjCss = ({ objCssMed
     const strReadMediaQContent = objMediaContent[cur].join('');
     const objCssAllMediaQ: ObjCssAllOptional = constructObjCssPerFile(strReadMediaQContent, objNew[cur] || {}, true) as ObjCssAllOptional;
 
+    // console.log('objCssAllMediaQ =', objCssAllMediaQ);
     if (objNew[cur]) {
       objNew[cur] = appendToMediaQChild({objBuild: objNew[cur], objGet: objCssAllMediaQ, strChild: 'combined'});
       objNew[cur] = appendToMediaQChild({objBuild: objNew[cur], objGet: objCssAllMediaQ, strChild: 'single'});

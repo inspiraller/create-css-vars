@@ -1,0 +1,18 @@
+
+.l-fixed--top {
+  position: fixed;
+  top: 0;
+  background: var(--primary-white);
+  z-index: 100; /* above all main */
+  width: 100%;
+}
+
+@media (max-width:1427px){
+  .l-fixed--top {
+    left: calc(((100vw - 600px) / 2) - 10px); /* - 10px allow for scrollbar? */
+    width: 600px;
+  }
+  .l-fixed--top + div { /* create-css-vars -- to fix: .l-fixed--top + * */
+    margin-top: 65px;
+  }
+}

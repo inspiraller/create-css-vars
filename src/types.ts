@@ -1,4 +1,4 @@
-export type TFuncStr = (str: string, str2?: string) => string;
+export type TFuncStr = (str: string, str2?: string, str3?: string) => string;
 export interface KeyStringArr {
   [key: string]: string[];
 }

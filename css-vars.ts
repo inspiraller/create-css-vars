@@ -4,6 +4,29 @@
       [key: string]: (prop: TFuncStr) => string;
     }
     const selectors: Selectors = {
+  '.l-fixed--top': getTheme => `
+  position: fixed;
+  top: 0;
+  background: ${getTheme('--primary-white')};
+  z-index: 100; 
+  width: 100%;
+
+
+
+ @media (max-width:1427px) {
+  
+    left: calc(((100vw - 600px) / 2) - 10px); 
+    width: 600px;
+  
+
+& + div {
+   
+    margin-top: 65px;
+  
+}
+
+ }
+`,
   '.search__form': getTheme => `
 /* *************************************************** */
 /* start - .search__form:hover svg path,.search__form:hover svg circle */

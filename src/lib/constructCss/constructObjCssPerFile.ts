@@ -19,10 +19,10 @@ import iterateConstructMediaQObjCss from './iterateConstructMediaQObjCss';
 
 import { ObjCssAll, ObjCssAllOptional, MediaQ, KeyStringArr, TFuncStr} from 'src/types';
 
-const replaceMediaQ: TFuncStr = (str, m1) => {
-  str = markEndCurly(str, m1);
-  str = str.replace(RegExp(`\\@media[^\\${m1}]*\\${m1}`, 'g'), '');
-  str = str.replace(RegExp(`\\${m1}`, 'g'), '');
+const replaceMediaQ: TFuncStr = (str, m1, m2) => {
+  str = markEndCurly(str, m1, m2);
+  str = str.replace(RegExp(`\\@media[^\\${m2}]*\\${m2}`, 'g'), '');
+  str = str.replace(RegExp(`\\${m2}`, 'g'), '');
   return str;
 };
 
@@ -30,7 +30,7 @@ type TconstructObjCssPerFile = (strReadFile: string, objCssAll: ObjCssAll | ObjC
 const constructObjCssPerFile: TconstructObjCssPerFile = (strReadFile, objCssAll, isMediaQ = false) => {
   let str = strReadFile;
   const {
-    objM: { m1 }
+    objM: { m1, m2 }
   } = getSafMarkers(str);
   str = clearCssComments(str, m1);
 
@@ -41,7 +41,7 @@ const constructObjCssPerFile: TconstructObjCssPerFile = (strReadFile, objCssAll,
     constructCssObj: constructAnySingles
   });
 
-  const strExcludeMediaQ = !isMediaQ ? replaceMediaQ(str, m1) : str;
+  const strExcludeMediaQ = !isMediaQ ? replaceMediaQ(str, m1, m2) : str;
   objCssAll.combined = execConstructObjCss({
     objCss: objCssAll.combined as KeyStringArr || {} as KeyStringArr,
     str: strExcludeMediaQ,
@@ -56,6 +56,9 @@ const constructObjCssPerFile: TconstructObjCssPerFile = (strReadFile, objCssAll,
     constructCssObj: constructAnyObjCss
   });
 
+  // console.log('strExcludeMediaQ = ', strExcludeMediaQ);
+  // console.log('regWithChild = ', regWithChild);
+  // console.log('strExcludeMediaQ.search(regWithChild)', strExcludeMediaQ.search(regWithChild));
   objCssAll.withchild = execConstructObjCss({
     objCss: objCssAll.withchild as KeyStringArr || {} as KeyStringArr,
     str: strExcludeMediaQ,
@@ -75,7 +78,8 @@ const constructObjCssPerFile: TconstructObjCssPerFile = (strReadFile, objCssAll,
     objCssAllMediaQ.mediaq = iterateConstructMediaQObjCss({
       objCssMediaQ: objCssAllMediaQ.mediaq as MediaQ,
       str,
-      m1
+      m1,
+      m2
     });
   }
 
