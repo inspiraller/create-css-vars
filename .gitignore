@@ -6,3 +6,4 @@ sonarqube-7.1
 .env
 css
 READMES
+css-vars.ts
