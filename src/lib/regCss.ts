@@ -38,8 +38,22 @@ export const regBeginNonSingle = RegExp(
   'ig'
 );
 
+// export const regMatchAnySingle = RegExp(
+//   `(^|\\n)\\s*(${sregSingleOr})\\s${sregNotCurlyOr}()\\{(${sregNotCurlyOr})\\}`,
+//   'ig'
+// );
+// export const regMatchAnySingle = RegExp(
+//   `([\\n\\,])?\\s*(${sregSingleOr})([\\s\\,]${sregNotCurlyOr})?\\{()`,
+//   'ig'
+// );
+
+// export const regMatchAnySingle = RegExp(
+//   `(\\,|\\}\\s*)(${sregSingleOr})([\\s\\,\\{])()`,
+//   'ig'
+// );
+
 export const regMatchAnySingle = RegExp(
-  `(^|\\n)\\s*(${sregSingleOr})\\s${sregNotCurlyOr}()\\{(${sregNotCurlyOr})\\}`,
+  `(\\,|\\})\\s*(${sregSingleOr})()()`,
   'ig'
 );
 

@@ -24,14 +24,15 @@ describe('constructObjCssPerFile()', () => {
         beginNonSingle: {},
         mediaq: {}
       };
-      const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll));
+      const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll);
 
       const expected: ObjCssAll = {
         combined: {
           ',header,section,': ['width: 100px;']
         },
         single: {
-          header: ['color: red;']
+          header: ['color: red;'],
+          section: []
         },
         withchild: {
           'header .child': ['background: red;']
@@ -59,13 +60,16 @@ describe('constructObjCssPerFile()', () => {
         beginNonSingle: {},
         mediaq: {}
       };
-      const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll));
+      const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll);
 
       const expected: ObjCssAll = {
         combined: {
           ',header,section,': ['width: 100px;']
         },
-        single: {},
+        single: {
+          header: [],
+          section: []
+        },
         withchild: {},
         pseudo: {
           'header:hover': ['background: red;']
@@ -88,19 +92,25 @@ describe('constructObjCssPerFile()', () => {
         combined: {
           ',header,section,': ['position: fixed;']
         },
-        single: {},
+        single: {
+          header: [],
+          section: []
+        },
         withchild: {},
         pseudo: {},
         beginNonSingle: {},
         mediaq: {}
       };
-      const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll));
+      const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll);
 
       const expected: ObjCssAll = {
         combined: {
           ',header,section,': ['position: fixed;', 'width: 100px;']
         },
-        single: {},
+        single: {
+          header: [],
+          section: []
+        },
         withchild: {},
         pseudo: {
           'header:hover': ['background: red;']

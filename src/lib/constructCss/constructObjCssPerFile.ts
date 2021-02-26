@@ -28,18 +28,21 @@ const replaceMediaQ: TFuncStr = (str, m1, m2) => {
 
 type TconstructObjCssPerFile = (strReadFile: string, objCssAll: ObjCssAll | ObjCssAllOptional, isMediaQ?: boolean) => ObjCssAll | ObjCssAllOptional;
 const constructObjCssPerFile: TconstructObjCssPerFile = (strReadFile, objCssAll, isMediaQ = false) => {
-  let str = strReadFile;
+  let str = ` ${strReadFile}` ; // add space, so regex can multiple find - avoid using ^|
   const {
     objM: { m1, m2 }
   } = getSafMarkers(str);
   str = clearCssComments(str, m1);
 
+
+  // console.log('constructObjCssPerFile() ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
   objCssAll.single = execConstructObjCss({
     objCss: objCssAll.single as KeyStringArr || {} as KeyStringArr,
     str: str,
     reg: regMatchAnySingle,
     constructCssObj: constructAnySingles
   });
+  // console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
 
   const strExcludeMediaQ = !isMediaQ ? replaceMediaQ(str, m1, m2) : str;
   objCssAll.combined = execConstructObjCss({
