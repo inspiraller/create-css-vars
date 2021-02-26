@@ -53,7 +53,7 @@ export const regBeginNonSingle = RegExp(
 // );
 
 export const regMatchAnySingle = RegExp(
-  `(\\,|\\})\\s*(${sregSingleOr})()()`,
+  `(\\,|\\}|@media[^\\{]*\\{)\\s*(${sregSingleOr})()()`,
   'ig'
 );
 

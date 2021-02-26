@@ -1,6 +1,6 @@
 {
   "name": "@inspiraller/create-css-vars",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "This converts a directory of css files into a file of variable names for use with React = styled components",
   "keywords": [
     "convert-css-to-variables",
@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "test": "cross-env NODE_ENV=test jest",
-    "start": "cross-env-shell babel-node --extensions '.ts,.tsx' src/index.ts --from=./css to=./",
+    "start": "cross-env-shell babel-node --extensions '.ts,.tsx' src/index.ts --from=./z-css to=./",
     "prod:clear": "rimraf dist && mkdir dist",
     "prod:cleanTs": "rimraf dist/**/*.ts && rimraf dist/*.ts",
     "prod:resolve": "tspath -f && mv -f dist/src/* dist && rm -r dist/src",

@@ -9,7 +9,6 @@ const execReg: TexecReg = ({ str, reg: regRef, callback }) => {
   const reg = new RegExp(regRef);
   // const arr: Array<string[]> = [];
   while ((arrM = reg.exec(str))) {
-    // console.log(`str=@@@"${str}"@@@`);
     // console.log('arrM[2] = ', arrM[2], reg);
     // str = str.substr(reg.lastIndex + arrM[2].length); // fix missing multiple matches
     // arr.push(Array.prototype.slice.call(arrM));
