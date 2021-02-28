@@ -78,10 +78,10 @@ const constructObjCssPerFile: TconstructObjCssPerFile = (strReadFile, objCssAll,
     constructCssObj: constructAnyObjCss
   });
 
-  const objCssAllMediaQ: ObjCssAll = objCssAll as ObjCssAll;
-  if (objCssAllMediaQ.mediaq) {
-    objCssAllMediaQ.mediaq = iterateConstructMediaQObjCss({
-      objCssMediaQ: objCssAllMediaQ.mediaq as MediaQ,
+  const objCssWithMediaQ: ObjCssAll = objCssAll as ObjCssAll;
+  if (objCssWithMediaQ.mediaq) {
+    objCssWithMediaQ.mediaq = iterateConstructMediaQObjCss({
+      objMediaQ: objCssWithMediaQ.mediaq as MediaQ,
       str,
       m1,
       m2
