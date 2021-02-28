@@ -1,4 +1,4 @@
-import { regTruncate } from '../regCss';
+import { regTruncate } from 'src/util/regCss';
 import { Tconstruct } from 'src/types';
 import constructAnyObjCss from './constructAnyObjCss';
 

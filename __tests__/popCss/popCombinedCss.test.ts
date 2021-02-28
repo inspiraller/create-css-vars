@@ -1,7 +1,7 @@
-import popCombinedCss from 'src/lib/popCss/popCombinedCss';
+import popCombinedCss from 'src/popCss/popCombinedCss';
 import { KeyStringArr } from 'src/types';
-import crop from 'src/lib/crop';
-import clearCssComments from 'src/lib/clearCssComents';
+import crop from 'src/util/crop';
+import clearCssComments from 'src/util/clearCssComents';
 
 describe('popCombinedCss', () => {
   describe('success', () => {

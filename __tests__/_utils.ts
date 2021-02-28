@@ -1,5 +1,5 @@
 import { ObjCssAll, KeyStringArr, MediaQ } from 'src/types';
-import crop from 'src/lib/crop';
+import crop from 'src/util/crop';
 
 type TcropArrStr = (arr: string[]) => string[];
 const cropArrStr: TcropArrStr = arr => arr.map(item => crop(item));

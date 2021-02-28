@@ -1,5 +1,5 @@
 import { KeyStringArr, MediaQ, ObjCssAllOptional } from 'src/types';
-import markEndCurly from 'src/lib/markEndCurly';
+import markEndCurly from 'src/util/markEndCurly';
 import constructAnyObjCss from './constructAnyObjCss';
 import execConstructObjCss from './execConstructObjCss';
 import constructObjCssPerFile from './constructObjCssPerFile';

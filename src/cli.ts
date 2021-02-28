@@ -1,28 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 
-import getArgs from './lib/getArgs';
+import getArgs from './util/getArgs';
 
-import { Selectors } from 'src/types';
-
-import populateObjCssFromDir from './lib/populateObjCssFromDir';
-import createSelectorsFromPopCss from './lib/createSelectorsFromPopCss';
-
-type TconvertObjStrToStr = (selectors: Selectors) => string;
-const convertObjStrToStr: TconvertObjStrToStr = selectors =>
-  Object.keys(selectors).reduce((accum, cur) => `${accum}  '${cur}': getTheme => \`${selectors[cur]}\`,\n`, '');
-
-type TconvertSelectorsToStr = (selectors: Selectors) => string;
-const convertSelectorsToStr: TconvertSelectorsToStr = selectors => {
-  return `
-    export type TFuncStr = (str: string, str2?: string, str3?: string) => string;
-    export interface Selectors {
-      [key: string]: (prop: TFuncStr) => string;
-    }
-    const selectors: Selectors = {\n${convertObjStrToStr(selectors)}\n};
-    export default selectors;
-  `;
-};
+import constructObjCssFromDir from './constructObjCss/constructObjCssFromDir';
+import createSelectorsFromObjCss from './popCss/createSelectorsFromObjCss';
+import convertSelectorsToStr from './convertSelectors/convertSelectorsToStr';
 
 type Tcli = (args: string[]) => void;
 const cli: Tcli = args => {
@@ -50,7 +33,7 @@ const cli: Tcli = args => {
     pathOut = path.resolve(cwd);
   }
 
-  const objCssAll = populateObjCssFromDir(pathIn);
+  const objCssAll = constructObjCssFromDir(pathIn);
 
   // console.log('objCssAll.mediaq = ', objCssAll.mediaq);
   // console.log('objCssAll.single = ', objCssAll.single);
@@ -58,16 +41,13 @@ const cli: Tcli = args => {
   // console.log('objCssAll.pseudo = ', objCssAll.pseudo);
   // console.log('objCssAll.combined = ', objCssAll.combined);
 
-  const selectors = createSelectorsFromPopCss(objCssAll);
-  // console.log('selectors = ', selectors);
+  const selectors = createSelectorsFromObjCss(objCssAll);
   const strSelectors = convertSelectorsToStr(selectors);
 
   if (!strSelectors) {
     console.log('! Warning: There is no css!!');
     return
   }
-  //console.log('strSelectors = ', strSelectors);
-
   const outFile = 'css-vars.ts';
 
   fs.writeFile(path.resolve(pathOut, outFile), strSelectors, err => {

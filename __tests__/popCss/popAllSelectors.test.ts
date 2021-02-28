@@ -1,7 +1,7 @@
-import popAllSelectors from 'src/lib/popCss/popAllSelectors';
+import popAllSelectors from 'src/popCss/popAllSelectors';
 import { ObjCssAll } from 'src/types';
-import crop from 'src/lib/crop';
-import clearCssComments from 'src/lib/clearCssComents';
+import crop from 'src/util/crop';
+import clearCssComments from 'src/util/clearCssComents';
 
 describe('popAllSelectors', () => {
   describe('success', () => {

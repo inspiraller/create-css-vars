@@ -1,5 +1,5 @@
 import { KeyStringArr } from 'src/types';
-import constructCombinedObjCss from 'src/lib/constructCss/constructCombinedObjCss';
+import constructCombinedObjCss from 'src/constructObjCss/constructCombinedObjCss';
 
 describe('constructCombinedObjCss() - ,header,section,aside .child,', () => {
   describe('success', () => {

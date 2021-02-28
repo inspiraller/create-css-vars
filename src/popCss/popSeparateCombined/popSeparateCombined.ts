@@ -2,7 +2,7 @@ import { TFuncStr, KeyStringArr, TarrCss } from 'src/types';
 import { getPseudoSelector, createCssPseudo } from './popPseudoCss';
 import { getChildSelector, createCssWithChild } from './popWithChildCss';
 
-import { sregSingleOr } from 'src/lib/regCss';
+import { sregSingleOr } from 'src/util/regCss';
 
 export type TpopCss = (props: { strSingleSelector: string; objCss: KeyStringArr }) => string;
 

@@ -1,5 +1,5 @@
-import getSafMarkers from 'src/lib/getSafeMarkers';
-import clearCssComments from 'src/lib/clearCssComents';
+import getSafMarkers from 'src/util/getSafeMarkers';
+import clearCssComments from 'src/util/clearCssComents';
 
 import {
   regCombined,
@@ -8,8 +8,8 @@ import {
   regPseudoOrAttr,
   regBeginNonSingle,
   regMatchAnySingle
-} from 'src/lib/regCss';
-import markEndCurly from 'src/lib/markEndCurly';
+} from 'src/util/regCss';
+import markEndCurly from 'src/util/markEndCurly';
 import execConstructObjCss from './execConstructObjCss';
 import constructCombinedObjCss from './constructCombinedObjCss';
 import constructAnyObjCss from './constructAnyObjCss';

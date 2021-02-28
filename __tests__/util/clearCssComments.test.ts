@@ -1,5 +1,5 @@
-import clearCssComments from 'src/lib/clearCssComents';
-import crop from 'src/lib/crop';
+import clearCssComments from 'src/util/clearCssComents';
+import crop from 'src/util/crop';
 
 describe('updateSelectors()', () => {
   describe('clearCssComments()', () => {

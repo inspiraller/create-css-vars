@@ -5,7 +5,7 @@ import {
   regPseudoOrAttr,
   regWithChild
   // sregWithChild
-} from 'src/lib/regCss';
+} from 'src/util/regCss';
 
 describe('regCss', () => {
   describe('regTruncate', () => {

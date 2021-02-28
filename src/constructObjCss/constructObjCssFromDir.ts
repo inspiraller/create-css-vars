@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { ObjCssAll, TFuncStr } from 'src/types';
-import constructObjCssPerFile from './constructCss/constructObjCssPerFile';
+import constructObjCssPerFile from './constructObjCssPerFile';
 
 type TexcludeDir = (file: string) => boolean;
 const excludeDir: TexcludeDir = file =>

@@ -1,6 +1,6 @@
 
 
-import execReg from 'src/lib/execReg';
+import execReg from 'src/util/execReg';
 import { KeyStringArr, TFuncStr, Tconstruct } from 'src/types';
 
 export const replaceVars: TFuncStr = str => str.replace(/var\((--[^\)]*)\)/g, '${getTheme(\'$1\')}');

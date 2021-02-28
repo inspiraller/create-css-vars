@@ -1,6 +1,6 @@
-import popWithChildCss from 'src/lib/popCss/popSeparateCombined/popWithChildCss';
+import popWithChildCss from 'src/popCss/popSeparateCombined/popWithChildCss';
 import { KeyStringArr } from 'src/types';
-import crop from 'src/lib/crop';
+import crop from 'src/util/crop';
 
 describe('popWithChildCss', () => {
   describe('success', () => {

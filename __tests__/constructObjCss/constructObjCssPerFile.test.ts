@@ -1,6 +1,6 @@
 import { ObjCssAll } from 'src/types';
-import constructObjCssPerFile from 'src/lib/constructCss/constructObjCssPerFile';
-import { cropObjCssChildren } from '../../_utils';
+import constructObjCssPerFile from 'src/constructObjCss/constructObjCssPerFile';
+import { cropObjCssChildren } from '../_utils';
 
 describe('constructObjCssPerFile()', () => {
   describe('success', () => {

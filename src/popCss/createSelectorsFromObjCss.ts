@@ -1,6 +1,6 @@
 import { ObjCssAll, Selectors } from 'src/types';
 
-import popAllVarCss from './popCss/popAllSelectors';
+import popAllVarCss from 'src/popCss/popAllSelectors';
 
 type TcreateSelectorsFromObjCss = (objCssAll: ObjCssAll) => Selectors;
 const createSelectorsFromObjCss: TcreateSelectorsFromObjCss = objCssAll =>

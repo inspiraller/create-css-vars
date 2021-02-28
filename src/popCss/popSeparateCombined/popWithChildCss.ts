@@ -1,6 +1,6 @@
 import { TFuncStr, TarrCss } from 'src/types';
-import { sregWithChild, sregCombinator } from 'src/lib/regCss';
-import { TpopCss } from 'src/lib/popCss/popCombinedCss';
+import { sregWithChild, sregCombinator } from 'src/util/regCss';
+import { TpopCss } from 'src/popCss/popCombinedCss';
 
 export const createCssWithChild: TFuncStr = (strChildSelector, css) => `& ${strChildSelector} {
   ${css}

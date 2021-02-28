@@ -1,7 +1,7 @@
-import popMediaQCss from 'src/lib/popCss/popMediaQCss';
+import popMediaQCss from 'src/popCss/popMediaQCss';
 import { MediaQ } from 'src/types';
-import crop from 'src/lib/crop';
-import clearCssComments from 'src/lib/clearCssComents';
+import crop from 'src/util/crop';
+import clearCssComments from 'src/util/clearCssComents';
 
 describe('popWMediaQCss', () => {
   describe('success', () => {

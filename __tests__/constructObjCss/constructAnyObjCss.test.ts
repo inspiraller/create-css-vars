@@ -1,5 +1,5 @@
 import { KeyStringArr } from 'src/types';
-import constructAnyObjCss from 'src/lib/constructCss/constructAnyObjCss';
+import constructAnyObjCss from 'src/constructObjCss/constructAnyObjCss';
 
 describe('constructAnyObjCss()', () => {
   describe('success', () => {
