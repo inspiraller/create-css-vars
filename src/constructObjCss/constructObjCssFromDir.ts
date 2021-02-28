@@ -24,15 +24,14 @@ const readFile: TFuncStr = file => {
   return read.toString();
 };
 
-type TpopulateObjCssFromDir = (pathIn: string, objCssAll?: ObjCssAll) => ObjCssAll;
-const populateObjCssFromDir: TpopulateObjCssFromDir = (
+type TconstructObjCssFromDir = (pathIn: string, objCssAll?: ObjCssAll) => ObjCssAll;
+const constructObjCssFromDir: TconstructObjCssFromDir = (
   pathIn,
   objCssAll = {
     combined: {},
     single: {},
     withchild: {},
     pseudo: {},
-    beginNonSingle: {},
     mediaq: {}
   }
 ) => {
@@ -50,11 +49,11 @@ const populateObjCssFromDir: TpopulateObjCssFromDir = (
       }
     } else if (stat.isDirectory()) {
       if (!excludeDir(file)) {
-        objCssAll = populateObjCssFromDir(path.resolve(pathIn, file), objCssAll);
+        objCssAll = constructObjCssFromDir(path.resolve(pathIn, file), objCssAll);
       }
     }
   });
   return objCssAll;
 };
 
-export default populateObjCssFromDir;
+export default constructObjCssFromDir;

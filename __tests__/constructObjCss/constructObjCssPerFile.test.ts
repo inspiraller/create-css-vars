@@ -3,7 +3,7 @@ import constructObjCssPerFile from 'src/constructObjCss/constructObjCssPerFile';
 import { cropObjCssChildren } from '../_utils';
 
 describe('constructObjCssPerFile()', () => {
-  describe('success', () => {
+  fdescribe('success', () => {
     it('should match - combination, single, withchild', () => {
       const strReadFile = `
         header, section {
@@ -21,7 +21,6 @@ describe('constructObjCssPerFile()', () => {
         single: {},
         withchild: {},
         pseudo: {},
-        beginNonSingle: {},
         mediaq: {}
       };
       const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll);
@@ -38,7 +37,6 @@ describe('constructObjCssPerFile()', () => {
           'header .child': ['background: red;']
         },
         pseudo: {},
-        beginNonSingle: {},
         mediaq: {}
       };
       expect(actual).toEqual(expected);
@@ -57,7 +55,6 @@ describe('constructObjCssPerFile()', () => {
         single: {},
         withchild: {},
         pseudo: {},
-        beginNonSingle: {},
         mediaq: {}
       };
       const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll);
@@ -74,7 +71,6 @@ describe('constructObjCssPerFile()', () => {
         pseudo: {
           'header:hover': ['background: red;']
         },
-        beginNonSingle: {},
         mediaq: {}
       };
       expect(actual).toEqual(expected);
@@ -98,7 +94,6 @@ describe('constructObjCssPerFile()', () => {
         },
         withchild: {},
         pseudo: {},
-        beginNonSingle: {},
         mediaq: {}
       };
       const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll);
@@ -115,7 +110,6 @@ describe('constructObjCssPerFile()', () => {
         pseudo: {
           'header:hover': ['background: red;']
         },
-        beginNonSingle: {},
         mediaq: {}
       };
       expect(actual).toEqual(expected);

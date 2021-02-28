@@ -27,21 +27,21 @@ export const cropObjCssChildren: TcropObjCssChildren = objCssAll =>
       ...accum,
       ...{ [cur as keyof ObjCssAll]: cropObjCss(objCssAll[cur as keyof ObjCssAll] as KeyStringArr) }
     };
-  }, {} as ObjCssAll);
+  }, {} as ObjCssAll | MediaQ);
 
 
-  type TcropMediaQ = (objMediaQ:  MediaQ) => MediaQ;
-  export const cropMediaQ: TcropMediaQ = objMediaQ =>
-    Object.keys(objMediaQ).reduce((accum, cur) => {
-      return {
-        ...accum,
-        ...{
-          [cur]: Object.keys(objMediaQ[cur]).reduce(
-            (accumObjCss, keyObjCss) => ({
-              ...accumObjCss,
-              ...{[keyObjCss]: cropObjCss(objMediaQ[cur][keyObjCss])}
-            }), {} as KeyStringArr
-          )
-        }
-      };
-    }, {} as MediaQ);
+type TcropMediaQ = (objMediaQ:  MediaQ) => MediaQ;
+export const cropMediaQ: TcropMediaQ = objMediaQ =>
+  Object.keys(objMediaQ).reduce((accum, cur) => {
+    return {
+      ...accum,
+      ...{
+        [cur]: Object.keys(objMediaQ[cur]).reduce(
+          (accumObjCss, keyObjCss) => ({
+            ...accumObjCss,
+            ...{[keyObjCss]: cropObjCss(objMediaQ[cur][keyObjCss])}
+          }), {} as KeyStringArr
+        )
+      }
+    };
+  }, {} as MediaQ);

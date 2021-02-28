@@ -52,6 +52,7 @@ export const regBeginNonSingle = RegExp(
 //   'ig'
 // );
 
+// TO FIX- problem - transition: all, color 0.2s, border-color 0.2s etc...
 export const regMatchAnySingle = RegExp(
   `(\\,|\\}|@media[^\\{]*\\{)\\s*(${sregSingleOr})()()`,
   'ig'

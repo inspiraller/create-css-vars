@@ -10,14 +10,12 @@ export interface ObjCssAllReq {
     single: KeyStringArr;
     pseudo: KeyStringArr;
     withchild: KeyStringArr;
-    beginNonSingle: KeyStringArr;
 }
 export interface ObjCssAllOptional {
     combined?: ObjCssAllReq['combined'];
     single?: ObjCssAllReq['single'];
     pseudo?: ObjCssAllReq['pseudo'];
     withchild?: ObjCssAllReq['withchild'];
-    beginNonSingle?: ObjCssAllReq['beginNonSingle'];
 }
 export interface MediaQ {
     [key: string]: ObjCssAllOptional;

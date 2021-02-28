@@ -26,6 +26,7 @@ css /
 link[x] {
   color: pink;
   border: var(--primary-border);
+  background-image: url('./file.svg');
 }
 @media () {
   .link {
@@ -46,7 +47,7 @@ link[x] {
 **package.json**
 ```
   "scripts": {
-    "start": "create-css-vars --from=./mycss to=./mylocal/folder"
+    "start": "create-css-vars --from=./mycss to=./mylocal/folder assets=./assets"
   },
 ```
 
@@ -65,7 +66,7 @@ npm start
 **example:**
 ```typescript
 const vars = {
-  '.link': getTheme => `
+  '.link': (getTheme, getAsset) => `
 
     /* combined - .link, .btn*/
     border: 1px solid red;
@@ -78,6 +79,7 @@ const vars = {
     [x] {
       color: pink;
       border: ${getTheme('--primary-border')};
+      background-image: url('${getAsset('file.svg')');
     }
     @media () {
       width: 100px;
@@ -96,6 +98,7 @@ const mytheme = {
 };
 
 const getTheme = var => mytheme[var];
+const getAsset = url => `/assets/${url}`;
 
 const Link = styled.span`
   ${selectors['.link'](getTheme)}

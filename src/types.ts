@@ -11,7 +11,7 @@ export interface ObjCssAllReq {
   single: KeyStringArr;
   pseudo: KeyStringArr;
   withchild: KeyStringArr;
-  beginNonSingle: KeyStringArr; // * or [] or -root or @ etc...
+  // beginNonSingle: KeyStringArr; // * or [] or -root or @ etc...
 }
 
 export interface ObjCssAllOptional {
@@ -19,7 +19,7 @@ export interface ObjCssAllOptional {
   single?: ObjCssAllReq['single'];
   pseudo?: ObjCssAllReq['pseudo'];
   withchild?: ObjCssAllReq['withchild'];
-  beginNonSingle?: ObjCssAllReq['beginNonSingle']; // * or [] or -root or @ etc...
+  // beginNonSingle?: ObjCssAllReq['beginNonSingle']; // * or [] or -root or @ etc...
 }
 
 export interface MediaQ {

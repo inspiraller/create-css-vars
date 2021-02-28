@@ -39,7 +39,7 @@ export const constructEnforceMediaQKey: Tconstruct =  ({ objCss, strSelectors, s
 };
 
 type TgetMediaQContent = (props: { str: string, m2: string }) => KeyStringArr;
-const getMediaQContent: TgetMediaQContent = ({ str,  m2 }) => {
+const getMediaQContent: TgetMediaQContent = ({ str,  m2}) => {
   const reg = RegExp(
     `(^|\\n)\\s*(\\@media[^\\{\\}]*)()\\{([^\\${m2}]*)\\}${m2}`,
     'ig'
