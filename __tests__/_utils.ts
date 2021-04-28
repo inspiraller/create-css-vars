@@ -1,4 +1,4 @@
-import { ObjCssAll, KeyStringArr, MediaQ } from 'src/types';
+import { ObjCssAll, KeyStringArr, MediaQ, ObjCssAllReq } from 'src/types';
 import crop from 'src/util/crop';
 
 type TcropArrStr = (arr: string[]) => string[];
@@ -29,19 +29,21 @@ export const cropObjCssChildren: TcropObjCssChildren = objCssAll =>
     };
   }, {} as ObjCssAll | MediaQ);
 
-
-type TcropMediaQ = (objMediaQ:  MediaQ) => MediaQ;
+type TcropMediaQ = (objMediaQ: MediaQ) => MediaQ;
 export const cropMediaQ: TcropMediaQ = objMediaQ =>
   Object.keys(objMediaQ).reduce((accum, cur) => {
     return {
       ...accum,
       ...{
-        [cur]: Object.keys(objMediaQ[cur]).reduce(
-          (accumObjCss, keyObjCss) => ({
+        [cur]: Object.keys(objMediaQ[cur]).reduce((accumObjCss, keyObjCss) => {
+          const objMedaQProp = objMediaQ[cur];
+          return {
             ...accumObjCss,
-            ...{[keyObjCss]: cropObjCss(objMediaQ[cur][keyObjCss])}
-          }), {} as KeyStringArr
-        )
+            ...{
+              [keyObjCss]: cropObjCss(objMedaQProp[keyObjCss as keyof ObjCssAllReq] as KeyStringArr)
+            }
+          };
+        }, {})
       }
     };
   }, {} as MediaQ);

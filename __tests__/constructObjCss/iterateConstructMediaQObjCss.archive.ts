@@ -1,5 +1,5 @@
-import { MediaQ } from 'src/types'
-import {cropMediaQ} from '../_utils';
+import { MediaQ } from 'src/types';
+import { cropMediaQ } from '../_utils';
 
 import iterateConstructMediaQObjCss from 'src/constructObjCss/iterateConstructMediaQObjCss';
 
@@ -154,8 +154,8 @@ describe('constructMediaQ - two methods', () => {
             },
             combined: {},
             withchild: {},
-            pseudo: {},
-            beginNonSingle: {}
+            pseudo: {}
+            // beginNonSingle: {}
           }
         });
       });

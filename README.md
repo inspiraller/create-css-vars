@@ -47,7 +47,7 @@ link[x] {
 **package.json**
 ```
   "scripts": {
-    "start": "create-css-vars --from=./mycss to=./mylocal/folder assets=./assets"
+    "start": "create-css-vars --from=./mycss to=./mylocal/folder"
   },
 ```
 

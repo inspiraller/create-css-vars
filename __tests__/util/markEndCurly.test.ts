@@ -1,14 +1,14 @@
-import markEndCurly  from 'src/util/markEndCurly';
+import markEndCurly from 'src/util/markEndCurly';
 
 describe('markEndCurly', () => {
   describe('success', () => {
-    it('Should add end marker to parent end curly - single line',  () => {
+    it('Should add end marker to parent end curly - single line', () => {
       const css = `.btn {position: absolute;}`;
       const actual = markEndCurly(css, '£', '¬');
       const result = `.btn {position: absolute;}¬`;
       expect(actual).toBe(result);
     });
-    it('Should add end marker to parent end curly - single',  () => {
+    it('Should add end marker to parent end curly - single', () => {
       const css = `
         .btn {
           position: absolute;
@@ -22,7 +22,7 @@ describe('markEndCurly', () => {
       `;
       expect(actual).toBe(result);
     });
-    it('Should add end marker to parent end curly - parent',  () => {
+    it('Should add end marker to parent end curly - parent', () => {
       const css = `
         .btn {
           position: absolute;
@@ -42,7 +42,7 @@ describe('markEndCurly', () => {
       `;
       expect(actual).toBe(result);
     });
-    it('Should add end marker to parent end curly - child with sibling',  () => {
+    it('Should add end marker to parent end curly - child with sibling', () => {
       const css = `
         .btn {
           position: absolute;
@@ -68,7 +68,7 @@ describe('markEndCurly', () => {
       `;
       expect(actual).toBe(result);
     });
-    it('Should add end marker to parent end curly - parent  with sibling',  () => {
+    it('Should add end marker to parent end curly - parent  with sibling', () => {
       const css = `
         .btn {
           position: absolute;
@@ -88,7 +88,7 @@ describe('markEndCurly', () => {
       `;
       expect(actual).toBe(result);
     });
-    it('Should add end marker to parent end curly - complex',  () => {
+    it('Should add end marker to parent end curly - complex', () => {
       const css = `
         .btn {
           position: absolute;
@@ -109,7 +109,7 @@ describe('markEndCurly', () => {
             background: blue;
           }
         }
-      `
+      `;
       const actual = markEndCurly(css, '£', '¬');
       const result = `
         .btn {
@@ -134,10 +134,9 @@ describe('markEndCurly', () => {
       `;
       expect(actual).toBe(result);
     });
-
   });
   describe('fail', () => {
-    it('Should not put any markers',  () => {
+    it('Should not put any markers', () => {
       const css = `
         /* something here.. */
       `;

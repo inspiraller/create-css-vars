@@ -11,9 +11,11 @@ type TpopAllVarCss = (props: {
 }) => string;
 
 const popAllVarCss: TpopAllVarCss = ({ strSingleSelector, objCssAll }) => {
+  // console.log('popAllVarCss() strSingleSelector = ', strSingleSelector);
   const arrCss: TarrCss = [];
   if (objCssAll.combined) {
     arrCss.push(popCombinedCss({ strSingleSelector, objCss: objCssAll.combined as KeyStringArr }));
+    // console.log('add combined = ', arrCss);
   }
   if (objCssAll.single) {
     arrCss.push(popSingleCss({ strSingleSelector, objCss: objCssAll.single as KeyStringArr }));

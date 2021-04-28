@@ -21,7 +21,7 @@ describe('popAllSelectors', () => {
         withchild: {
           '.item a': ['text-decoration: underline;']
         },
-        beginNonSingle: {},
+        // beginNonSingle: {},
         mediaq: {}
       };
 

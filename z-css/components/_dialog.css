@@ -1,0 +1,15 @@
+.dialog-wide {
+
+}
+
+@media (min-width:1428px){
+  .dialog-wide--raisetype {
+    width: 858px;
+    height: 602px;
+  }
+  .dialog-wide--raisetype-col1,
+  .dialog-wide--raisetype-col2 {
+    padding: 64px 56px;
+    display: flex;
+    flex-direction: column;
+  }
