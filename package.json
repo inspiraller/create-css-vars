@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "test": "cross-env NODE_ENV=test jest",
-    "start": "cross-env-shell babel-node --extensions '.ts,.tsx' src/index.ts --from=./css to=./ assets=/myassets",
+    "start": "cross-env-shell babel-node --extensions '.ts,.tsx' src/index.ts --from=./z-css/target to=./ assets=/myassets",
     "prod:clear": "rimraf dist && mkdir dist",
     "prod:cleanTs": "rimraf dist/**/*.ts && rimraf dist/*.ts",
     "fixTsPaths": "cross-env-shell babel-node --extensions '.ts,.tsx' ci/fixTsPaths.ts",
