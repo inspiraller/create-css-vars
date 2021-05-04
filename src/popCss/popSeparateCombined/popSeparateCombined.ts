@@ -86,7 +86,7 @@ export const popSeparateCombined: TpopSeparateCombined = ({
 type TgetReg = (str: string) => RegExp;
 
 const getRegSingleInCombined: TgetReg = strSingleSelector =>
-  RegExp(`(^|\\,)${strSingleSelector}([\\W]|$)`);
+  RegExp(`(^|[\\,\\s])${strSingleSelector}([\\W\\s]|$)`);
 
 type TseparateCombined = (props: {
   strSingleSelector: string;

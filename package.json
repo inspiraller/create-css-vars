@@ -1,6 +1,6 @@
 {
   "name": "@inspiraller/create-css-vars",
-  "version": "2.0.92",
+  "version": "2.0.93",
   "description": "This converts a directory of css files into a file of variable names for use with React = styled components",
   "keywords": [
     "convert-css-to-variables",
