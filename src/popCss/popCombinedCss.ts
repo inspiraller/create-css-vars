@@ -5,9 +5,9 @@ export type TpopCss = (props: { strSingleSelector: string; objCss: KeyStringArr 
 
 type TgetReg = (str: string) => RegExp;
 
-const sreg_special = '[^\w\_\$-]';
+const sreg_special = '[^\\w\\_\\$-]';
 const getRegSingleInCombined: TgetReg = strSingleSelector =>
-  RegExp(`(^|\\,)${strSingleSelector}(${sreg_special}|$)`);
+  RegExp(`(^|[\\,\\s])${strSingleSelector}(${sreg_special}|$)`);
 
 type TseparateCombined = (props: {
   strSingleSelector: string;
