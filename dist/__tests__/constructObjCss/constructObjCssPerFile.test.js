@@ -1,4 +1,4 @@
-'use strict';var __importDefault=this&&this.__importDefault||function(mod){return mod&&mod.__esModule?mod:{'default':mod};};Object.defineProperty(exports,'__esModule',{value:true});const constructObjCssPerFile_1=__importDefault(require('..\\..\\src\\constructObjCss\\constructObjCssPerFile'));const _utils_1=require('../_utils');describe('constructObjCssPerFile()',()=>{fdescribe('success',()=>{it('should match - combination, single, withchild',()=>{const strReadFile=`
+'use strict';var __importDefault=this&&this.__importDefault||function(mod){return mod&&mod.__esModule?mod:{'default':mod};};Object.defineProperty(exports,'__esModule',{value:true});const constructObjCssPerFile_1=__importDefault(require('../../constructObjCss/constructObjCssPerFile'));const _utils_1=require('../_utils');describe('constructObjCssPerFile()',()=>{fdescribe('success',()=>{it('should match - combination, single, withchild',()=>{const strReadFile=`
         header, section {
           width: 100px;
         }

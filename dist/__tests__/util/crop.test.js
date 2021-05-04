@@ -1,4 +1,4 @@
-'use strict';var __importDefault=this&&this.__importDefault||function(mod){return mod&&mod.__esModule?mod:{'default':mod};};Object.defineProperty(exports,'__esModule',{value:true});const crop_1=__importDefault(require('..\\..\\src\\util\\crop'));describe('crop',()=>{describe('success',()=>{it('should clean - single line whitespace',()=>{const actual=crop_1.default('   ');const result='';expect(actual).toBe(result);});it('should replace - end whitespace',()=>{const actual=crop_1.default(`a
+'use strict';var __importDefault=this&&this.__importDefault||function(mod){return mod&&mod.__esModule?mod:{'default':mod};};Object.defineProperty(exports,'__esModule',{value:true});const crop_1=__importDefault(require('../../util/crop'));describe('crop',()=>{describe('success',()=>{it('should clean - single line whitespace',()=>{const actual=crop_1.default('   ');const result='';expect(actual).toBe(result);});it('should replace - end whitespace',()=>{const actual=crop_1.default(`a
 
  `);const result='a';expect(actual).toBe(result);});it('should replace - start whitespace',()=>{const actual=crop_1.default(`
 

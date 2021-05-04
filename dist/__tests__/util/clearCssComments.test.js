@@ -1,4 +1,4 @@
-'use strict';var __importDefault=this&&this.__importDefault||function(mod){return mod&&mod.__esModule?mod:{'default':mod};};Object.defineProperty(exports,'__esModule',{value:true});const clearCssComents_1=__importDefault(require('..\\..\\src\\util\\clearCssComents'));const crop_1=__importDefault(require('..\\..\\src\\util\\crop'));describe('updateSelectors()',()=>{describe('clearCssComments()',()=>{it('remove comments from this string',()=>{const str=`
+'use strict';var __importDefault=this&&this.__importDefault||function(mod){return mod&&mod.__esModule?mod:{'default':mod};};Object.defineProperty(exports,'__esModule',{value:true});const clearCssComents_1=__importDefault(require('../../util/clearCssComents'));const crop_1=__importDefault(require('../../util/crop'));describe('updateSelectors()',()=>{describe('clearCssComments()',()=>{it('remove comments from this string',()=>{const str=`
       /*
       
       */

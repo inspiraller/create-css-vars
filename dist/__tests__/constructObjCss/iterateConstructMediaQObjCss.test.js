@@ -1,4 +1,4 @@
-'use strict';var __importDefault=this&&this.__importDefault||function(mod){return mod&&mod.__esModule?mod:{'default':mod};};Object.defineProperty(exports,'__esModule',{value:true});const _utils_1=require('../_utils');const iterateConstructMediaQObjCss_1=__importDefault(require('..\\..\\src\\constructObjCss\\iterateConstructMediaQObjCss'));const m1='\xAC';const m2='\xA3';describe('iterateConstructMediaQObjCss',()=>{describe('success',()=>{it('should - add to empty mediaQ - single ',()=>{let objMediaQ={};const str=`
+'use strict';var __importDefault=this&&this.__importDefault||function(mod){return mod&&mod.__esModule?mod:{'default':mod};};Object.defineProperty(exports,'__esModule',{value:true});const _utils_1=require('../_utils');const iterateConstructMediaQObjCss_1=__importDefault(require('../../constructObjCss/iterateConstructMediaQObjCss'));const m1='\xAC';const m2='\xA3';describe('iterateConstructMediaQObjCss',()=>{describe('success',()=>{it('should - add to empty mediaQ - single ',()=>{let objMediaQ={};const str=`
         @media (max-width:1427px){
           .link {
             font-family: "sans";
