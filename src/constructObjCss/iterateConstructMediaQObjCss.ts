@@ -30,7 +30,7 @@ import constructObjCssPerFile from './constructObjCssPerFile';
 //   return objBuild;
 // };
 
-export const constructEnforceMediaQKey: Tconstruct =  ({ objCss, strSelectors, strCss }) => {
+export const constructEnforceMediaQKey: Tconstruct = ({ objCss, strSelectors, strCss }) => {
   strSelectors = strSelectors.replace(/([\(\)\:])/g, ' $1 '); // add space around all
   strSelectors = strSelectors.replace(/ {2,}/g, ' '); // replace 2+ space with 1 space.
   // console.log(`strSelectors = "${strSelectors}"`);
@@ -38,12 +38,10 @@ export const constructEnforceMediaQKey: Tconstruct =  ({ objCss, strSelectors, s
   return constructAnyObjCss({ objCss, strSelectors, strCss });
 };
 
-type TgetMediaQContent = (props: { str: string, m2: string }) => KeyStringArr;
-const getMediaQContent: TgetMediaQContent = ({ str,  m2}) => {
-  const reg = RegExp(
-    `(^|\\n)\\s*(\\@media[^\\{\\}]*)()\\{([^\\${m2}]*)\\}${m2}`,
-    'ig'
-  );
+type TgetMediaQContent = (props: { str: string; m2: string }) => KeyStringArr;
+const getMediaQContent: TgetMediaQContent = ({ str, m2 }) => {
+  const reg = RegExp(`(^|\\n)\\s*(\\@media[^\\{\\}]*)()\\{([^\\${m2}]*)\\}${m2}`, 'ig');
+  // console.log('getMediaQContent() - reg = ', reg);
   return execConstructObjCss({
     objCss: {} as KeyStringArr,
     str,
@@ -59,19 +57,29 @@ export type TiterateConstructMediaQObjCss = (props: {
   m2: string;
 }) => MediaQ;
 
-const iterateConstructMediaQObjCss: TiterateConstructMediaQObjCss = ({ objMediaQ: objMediaQRef, str: strUnmarked, m1, m2 }) => {
-  let objMediaQ = {...objMediaQRef};
+const iterateConstructMediaQObjCss: TiterateConstructMediaQObjCss = ({
+  objMediaQ: objMediaQRef,
+  str: strUnmarked,
+  m1,
+  m2
+}) => {
+  let objMediaQ = { ...objMediaQRef };
 
   const str = markEndCurly(strUnmarked, m1, m2);
-  const objMediaContent = getMediaQContent ({
+  const objMediaContent = getMediaQContent({
     str,
     m2
   });
+  // console.log('objMediaContent = ', `str = "${str}"`);
 
   objMediaQ = Object.keys(objMediaContent).reduce((accum, cur) => {
-    const objNew =  {...accum};
+    const objNew = { ...accum };
     const strReadMediaQContent = objMediaContent[cur].join('');
-    objNew[cur] = constructObjCssPerFile(strReadMediaQContent, objNew[cur] || {}, true) as ObjCssAllOptional;
+    objNew[cur] = constructObjCssPerFile(
+      strReadMediaQContent,
+      objNew[cur] || {},
+      true
+    ) as ObjCssAllOptional;
     return objNew;
     // const objGet: ObjCssAllOptional = constructObjCssPerFile(strReadMediaQContent, objNew[cur] || {}, true) as ObjCssAllOptional;
 

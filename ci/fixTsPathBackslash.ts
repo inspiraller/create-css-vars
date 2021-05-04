@@ -4,7 +4,7 @@ import { iterateFiles, readFile } from './iterateFiles';
 
 const replaceRequireBackslash = (str: string) => {
   // require('..//util//
-  const reg = /(require\(\'[^\n]*)\\\\/g;
+  const reg = /(require\(\'[^\']*)\\\\/g;
   while (str.search(reg) !== -1) {
     str = str.replace(reg, '$1/');
   }
@@ -19,7 +19,7 @@ const fixTsPathBackslash = () => {
       const text = readFile(file); // require('..\\util\\getSafeMarkers'));
       const updated = replaceRequireBackslash(text);
       if (updated !== text) {
-        console.log('tspath backslashes fixed: ', file);
+        // console.log('tspath backslashes fixed: ', file);
         const stat = fs.statSync(file);
         fs.writeFileSync(file, updated, {
           encoding: 'utf8',

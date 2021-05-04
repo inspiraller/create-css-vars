@@ -1,5 +1,5 @@
-import { MediaQ } from 'src/types'
-import {cropMediaQ} from '../_utils';
+import { MediaQ } from 'src/types';
+import { cropMediaQ } from '../_utils';
 
 import iterateConstructMediaQObjCss from 'src/constructObjCss/iterateConstructMediaQObjCss';
 
@@ -17,6 +17,7 @@ describe('iterateConstructMediaQObjCss', () => {
           }
         }
       `;
+      // console.log('}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}');
       const actual = cropMediaQ(iterateConstructMediaQObjCss({ objMediaQ, str, m1, m2 }));
       expect(actual).toEqual({
         '@media ( max-width : 1427px )': {
@@ -93,7 +94,7 @@ describe('iterateConstructMediaQObjCss', () => {
         },
         '@media ( min-width : 1428px )': {
           single: {
-            '.btn': ['background: blue;'],
+            '.btn': ['background: blue;']
           }
         }
       });

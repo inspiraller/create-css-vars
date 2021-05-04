@@ -25,7 +25,7 @@ const fixTestToSrc = () => {
           flag: 'w', // default
           mode: stat.mode
         });
-        console.log('fix __tests__ src ref: ', file);
+        // console.log('fix __tests__ src ref: ', file);
       }
     }
   });

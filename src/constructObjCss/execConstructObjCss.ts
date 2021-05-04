@@ -25,10 +25,12 @@ const execConstructObjCss: TexecConstructObjCss = ({
     str,
     reg,
     callback: arrM => {
+      // console.log('£££££££££££££££££££££££££££££££££££££££££££ execReg()');
       let strCss = arrM[4]; // hack: regWithChild. would be group 3, not 4.
       const strSelectors = arrM[2];
       strCss = replaceVars(strCss);
       strCss = replaceRelativeAssets(strCss);
+      // console.log('strSelectors = ', strSelectors, 'strCss = ', strCss);
       objCss = constructCssObj({ objCss, strSelectors, strCss });
     }
   });
