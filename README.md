@@ -1,16 +1,16 @@
-# installing via npm
+# Installation
+### 1. installing via npm
 ```
 npm i @inspiraller/create-css-vars --save
 ```
 
-# Create a folder of css files locally
+### 2. Create a folder of css files locally
 ```
 css /
-  myfile.css
+  myCssFile.css
 ```
 
-# example -
-**myfile.css**
+**myCssFile.css**
 ```css
 .link,
 .btn {
@@ -35,7 +35,7 @@ link[x] {
 }
 ```
 
-# Create script to run create-css-vars
+### 3. Create script to run create-css-vars
 **package.json**
 ```
   "scripts": {
@@ -43,27 +43,23 @@ link[x] {
   },
 ```
 
-# Update to targeted paths if desired
+###  (Optional - specify from and destination)
 **package.json**
 ```
   "scripts": {
-    "start": "create-css-vars --from=./mycss to=./mylocal/folder"
+    "start": "create-css-vars --from=./css to=./destination/folder"
   },
 ```
 
-# run script
+### 4. run script
 ```
 npm start
 ```
 
-# Fie is created:
-- **css-vars.ts**
+### done !
 
-- a file with variables to reference the css in your styled components.
-- Notice, the replacement of var to getTheme()
-- You can then extract the css from this passing your getTheme method to pull the variable from your theme variable.
-
-**example:**
+### Fie is created:
+**destination/css-vars.ts**
 ```typescript
 const vars = {
   '.link': (getTheme, getAsset) => `
@@ -87,10 +83,13 @@ const vars = {
   `
 }
 ```
+------------
+# Now use in your styled components?
 
-# Import this into your styled component
+### 5. Import this into your styled component
+- Supply a function which replaces the css variable format with your own theme and assets.
 ```typescript
-import selectors from './css-vars';
+import cssVars from './css-vars';
 import styled from 'styled-components';
 
 const mytheme = {
@@ -101,21 +100,66 @@ const getTheme = var => mytheme[var];
 const getAsset = url => `/assets/${url}`;
 
 const Link = styled.span`
-  ${selectors['.link'](getTheme)}
+  ${cssVars['.link'](getTheme, getAsset)}
 `;
 ```
-
-# This will pull in the following css properties
+---------------------------------------------
+# What is supported?
 - All single selectors - class, id, tag
 - combined selectors - .class, something else, .x {}
 - pseudo and attribute selectors = .link:hover .link[x="something"]
 - all children = .link somechild {}
 - all media queries
 
- # It does not output generic css like this
+ ### It does not output generic css like this
  ```css
 *
 [attWithoutElem=""]
 @font-face
 :root
  ```
+-------------------------------------------------
+ # Options
+ - from
+ - to
+ - js or ts
+ - assets_from
+ - assets_to
+ - global_style
+
+**--from**
+- If not supplied will look for css at root level
+```
+npm run create-css-vars --from=./mycsslocation/target
+```
+**--to**
+- If not supplied will put css-vars in the root.
+```
+npm run create-css-vars --to=./mycssdestination/target
+```
+
+**--js** 
+
+- will create css-vars **.js**
+```
+npm run create-css-vars --js=true
+```
+
+**--ts** 
+- will create css-vars **.ts**
+```
+npm run create-css-vars --ts=true
+```
+
+**--assets_from**
+- Will copy a directory of assets from this folder to destination specified in options 'assets_to' or 'to' or  root level in order of preference.
+```
+npm run create-css-vars --assets_from=./assets/source
+```
+**--assets_to**
+- Will copy a directory of assets, but only if assets_from is supplied.
+```
+npm run create-css-vars --assets_from=./assets/source --assets_to=./destination/some/assets/folder
+```
+
+

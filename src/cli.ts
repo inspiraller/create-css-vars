@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 
 import getArgs from './util/getArgs';
@@ -7,33 +7,36 @@ import constructObjCssFromDir from './constructObjCss/constructObjCssFromDir';
 import createSelectorsFromObjCss from './popCss/createSelectorsFromObjCss';
 import convertSelectorsToStr from './convertSelectors/convertSelectorsToStr';
 
+const getRelPath = (to: string, label: string, isCreateDir?: boolean): string => {
+  let pathTo = '';
+  const cwd = process.cwd();
+  if (to) {
+    pathTo = fs.existsSync(to) ? to : path.join(cwd, to);
+  }
+  if (!fs.existsSync(pathTo)) {
+    if (isCreateDir && pathTo) {
+      fs.ensureDirSync(pathTo);
+    } else {
+      console.log(`! Warning: path "${label}" not found. Will load css from ${cwd}`);
+      pathTo = path.resolve(cwd);
+    }
+  }
+  return pathTo;
+};
+
 type Tcli = (args: string[]) => void;
 const cli: Tcli = args => {
   const objArgs = getArgs(args);
   const from = objArgs.from;
   const to = objArgs.to;
+  const js = objArgs.js;
+  const assets_from = objArgs.assets_from;
+  const assets_to = objArgs.assets_to;
 
-  const cwd = process.cwd();
+  const pathFrom = getRelPath(from, 'from');
+  const pathTo = getRelPath(to, 'to', true);
 
-  let pathIn = '';
-  if (from) {
-    pathIn = fs.existsSync(from) ? from : path.resolve(cwd, from);
-  }
-  if (!fs.existsSync(pathIn)) {
-    console.log(`! Warning: --from path "${from}" not found. Will load css from ${cwd}`);
-    pathIn = path.resolve(cwd);
-  }
-
-  let pathOut = '';
-  if (to) {
-    pathOut = fs.existsSync(to) ? to : path.resolve(cwd, to);
-  }
-  if (!fs.existsSync(pathOut)) {
-    console.log(`! Warning: --to path "${to}" not found. Will create here: ${cwd}/css-vars.ts`);
-    pathOut = path.resolve(cwd);
-  }
-
-  const objCssAll = constructObjCssFromDir(pathIn);
+  const objCssAll = constructObjCssFromDir(pathFrom);
 
   // console.log('objCssAll.mediaq = ', objCssAll.mediaq);
   // console.log('objCssAll.single = ', objCssAll.single);
@@ -42,20 +45,29 @@ const cli: Tcli = args => {
   // console.log('objCssAll.combined = ', objCssAll.combined);
 
   const selectors = createSelectorsFromObjCss(objCssAll);
-  const strSelectors = convertSelectorsToStr(selectors);
+
+  const strSelectors = convertSelectorsToStr(selectors, !!js);
 
   if (!strSelectors) {
     console.log('! Warning: There is no css!!');
-    return
+    return;
   }
-  const outFile = 'css-vars.ts';
+  const outFile = !js ? 'css-vars.ts' : 'css-vars.js';
 
-  fs.writeFile(path.resolve(pathOut, outFile), strSelectors, err => {
+  fs.writeFile(path.resolve(pathTo, outFile), strSelectors, err => {
     if (err) {
       throw err;
     }
-    console.log(`File: "${pathOut}\\${outFile}" created successfully.`);
+    console.log(`File: "${pathTo}\\${outFile}" created successfully.`);
   });
+
+  if (assets_from) {
+    const pathAssetsFrom = getRelPath(assets_from, 'assets_from');
+    const pathAssetsTo = assets_to ? getRelPath(assets_to, 'assets_to', true) : pathTo;
+    if (pathAssetsTo !== pathAssetsFrom) {
+      fs.copySync(pathAssetsFrom, pathAssetsTo, { overwrite: true });
+    }
+  }
 };
 
 export { cli };
