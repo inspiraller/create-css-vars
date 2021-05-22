@@ -216,3 +216,29 @@ npm run create-css-vars --global_styles=./css/global/myfiles.css
 **Will generate**
 css/globalStyles.ts
 
+---------------------------------------------------------------------
+Example of how to implement GlobalStyles for ThemeProvider
+
+**WrapStyled**
+```ts
+import React, { FC } from 'react';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import GlobalStyles from './globalStyles'; // <- this file will be generated if you supplied --global_styles=css/someglobal/files.css 
+import theme from './theme'; // <- This file will be generated if have variables declared in :root of any of your css files
+
+export const getTheme = (str: string) => theme[str];
+export const getAsset = (url: string) => `/my-assets-path/${url}`; // <- this is your custom assets path destination.
+
+const CreatedGlobalStyles = createGlobalStyle`
+  ${GlobalStyles(getTheme, getAsset)}
+`;
+
+const WrapStyled: FC = ({ children }) => (
+  <ThemeProvider theme={theme}>
+    <CreatedGlobalStyles />
+    {children}
+  </ThemeProvider>
+);
+
+export default WrapStyled;
+```
