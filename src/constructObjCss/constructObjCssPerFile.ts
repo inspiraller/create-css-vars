@@ -17,6 +17,7 @@ import constructAnySingles from './constructAnySingles';
 import iterateConstructMediaQObjCss from './iterateConstructMediaQObjCss';
 
 import { ObjCssAll, ObjCssAllOptional, MediaQ, KeyStringArr, TFuncStr } from 'src/types';
+import createTheme from './createTheme';
 
 type TisEmpty = (obj: any) => boolean;
 const isEmpty: TisEmpty = obj => Object.keys(obj).length === 0;
@@ -125,15 +126,13 @@ const constructObjCssPerFile: TconstructObjCssPerFile = (
     });
   }
 
-  // const beginNonSingle = execConstructObjCss({
-  //   objCss: objCssAll.beginNonSingle as KeyStringArr || {} as KeyStringArr,
-  //   str: strExcludeMediaQ,
-  //   reg: regBeginNonSingle,
-  //   constructCssObj: constructAnyObjCss
-  // });
-  // if (!isMediaQ || beginNonSingle) {
-  //   objCssAll.beginNonSingle = beginNonSingle;
-  // }
+  const theme = !isMediaQ ? createTheme(strReadFile) : null;
+  if (theme) {
+    (objCssAll as ObjCssAll).theme = {
+      ...(objCssAll as ObjCssAll).theme,
+      ...theme
+    };
+  }
 
   return objCssAll;
 };

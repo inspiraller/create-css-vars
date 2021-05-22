@@ -26,8 +26,23 @@ export interface MediaQ {
   [key: string]: ObjCssAllOptional;
 }
 
+export interface Theme {
+  [key: string]: string;
+}
+// example
+/*
+
+export const themeLight = {
+  '--primary-dark': '#020018',
+  '--primary-green': '#17B890',
+  '--primary-white': '#FFF',
+}
+*/
+
 export interface ObjCssAll extends ObjCssAllReq {
   mediaq: MediaQ;
+  theme?: Theme;
+  globalStyles?: string;
 }
 
 export type Tconstruct = (props: {

@@ -84,6 +84,32 @@ const vars = {
 }
 ```
 ------------
+# theme.ts or theme.js creation
+You can define root variables anywhere in your css
+and it will automatically generate these into a theme
+
+**mycss.css**
+```css
+:root {
+  --primary-dark: #020018;
+  --primary-green: #17B890;
+  --primary-white: #FFF;
+}
+```
+will generate
+
+**theme.ts**
+```ts
+const theme = {
+  '--primary-dark': '#020018';
+  '--primary-green': '#17B890';
+  '--primary-white': '#FFF';
+}
+export default theme;
+```
+
+
+------------------
 # Now use in your styled components?
 
 ### 5. Import this into your styled component
@@ -91,10 +117,7 @@ const vars = {
 ```typescript
 import cssVars from './css-vars';
 import styled from 'styled-components';
-
-const mytheme = {
-  '--primary-border': red
-};
+import mytheme from './theme';
 
 const getTheme = var => mytheme[var];
 const getAsset = url => `/assets/${url}`;
@@ -111,21 +134,18 @@ const Link = styled.span`
 - all children = .link somechild {}
 - all media queries
 
- ### It does not output generic css like this
- ```css
-*
-[attWithoutElem=""]
-@font-face
-:root
- ```
+### Using :root will create variables - see above
+this will be put into a theme.ts or theme.js
+
 -------------------------------------------------
+
  # Options
  - from
  - to
  - js or ts
  - assets_from
  - assets_to
- - global_style
+ - global_styles
 
 **--from**
 - If not supplied will look for css at root level
@@ -161,5 +181,38 @@ npm run create-css-vars --assets_from=./assets/source
 ```
 npm run create-css-vars --assets_from=./assets/source --assets_to=./destination/some/assets/folder
 ```
+-----------------------------------------------
+**--global_styles**
 
+To ensure these do not get missed you need to put them into a separate folder and specify them to go into your globalStyle.ts or globalStyle.js
+
+**css/global.css**
+```css
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face ...
+
+html {
+  font-size: 0.625%;
+}
+body {
+  font-family: myfont;
+}
+
+```
+
+
+**Specify css file that you want to generate globalStyle.js**
+```
+npm run create-css-vars --global_styles=./css/global.css
+```
+**or  specify folder**
+```
+npm run create-css-vars --global_styles=./css/global/myfiles.css
+```
+**Will generate**
+css/globalStyles.ts
 

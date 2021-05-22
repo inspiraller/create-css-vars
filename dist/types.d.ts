@@ -20,8 +20,13 @@ export interface ObjCssAllOptional {
 export interface MediaQ {
     [key: string]: ObjCssAllOptional;
 }
+export interface Theme {
+    [key: string]: string;
+}
 export interface ObjCssAll extends ObjCssAllReq {
     mediaq: MediaQ;
+    theme?: Theme;
+    globalStyles?: string;
 }
 export declare type Tconstruct = (props: {
     objCss: KeyStringArr;

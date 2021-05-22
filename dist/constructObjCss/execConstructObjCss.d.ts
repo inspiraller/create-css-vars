@@ -1,6 +1,4 @@
-import { KeyStringArr, TFuncStr, Tconstruct } from 'src/types';
-export declare const replaceVars: TFuncStr;
-export declare const replaceRelativeAssets: TFuncStr;
+import { KeyStringArr, Tconstruct } from 'src/types';
 declare type TexecConstructObjCss = (pros: {
     objCss: KeyStringArr;
     str: string;

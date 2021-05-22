@@ -21,9 +21,12 @@ describe('constructObjCssPerFile()', () => {
         single: {},
         withchild: {},
         pseudo: {},
-        mediaq: {}
+        mediaq: {},
+        theme: {}
       };
-      const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll);
+      const actual = cropObjCssChildren(
+        constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll
+      );
 
       const expected: ObjCssAll = {
         combined: {
@@ -37,7 +40,8 @@ describe('constructObjCssPerFile()', () => {
           'header .child': ['background: red;']
         },
         pseudo: {},
-        mediaq: {}
+        mediaq: {},
+        theme: {}
       };
       expect(actual).toEqual(expected);
     });
@@ -55,9 +59,12 @@ describe('constructObjCssPerFile()', () => {
         single: {},
         withchild: {},
         pseudo: {},
-        mediaq: {}
+        mediaq: {},
+        theme: {}
       };
-      const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll);
+      const actual = cropObjCssChildren(
+        constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll
+      );
 
       const expected: ObjCssAll = {
         combined: {
@@ -71,7 +78,8 @@ describe('constructObjCssPerFile()', () => {
         pseudo: {
           'header:hover': ['background: red;']
         },
-        mediaq: {}
+        mediaq: {},
+        theme: {}
       };
       expect(actual).toEqual(expected);
     });
@@ -94,9 +102,12 @@ describe('constructObjCssPerFile()', () => {
         },
         withchild: {},
         pseudo: {},
-        mediaq: {}
+        mediaq: {},
+        theme: {}
       };
-      const actual = cropObjCssChildren(constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll);
+      const actual = cropObjCssChildren(
+        constructObjCssPerFile(strReadFile, objCssAll) as ObjCssAll
+      );
 
       const expected: ObjCssAll = {
         combined: {
@@ -110,7 +121,8 @@ describe('constructObjCssPerFile()', () => {
         pseudo: {
           'header:hover': ['background: red;']
         },
-        mediaq: {}
+        mediaq: {},
+        theme: {}
       };
       expect(actual).toEqual(expected);
     });
